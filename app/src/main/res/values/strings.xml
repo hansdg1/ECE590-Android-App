@@ -2,4 +2,6 @@
     <string name="app_name">Android Effects Demo</string>
     <string name="hello_world">TEAM 2 ROXZ!!</string>
     <string name="action_settings">Settings</string>
+    <string name="reverb_effect_name">Reverb</string>
+    <string name="reverb_effect_desc">An audio effect that mimics reverberations (echos)</string>
 </resources>
