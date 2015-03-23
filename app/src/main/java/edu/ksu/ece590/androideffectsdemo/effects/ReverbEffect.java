@@ -33,7 +33,7 @@ public class ReverbEffect implements IEffect
             buffer[i + delaySamples] += (short)((float)input.GetValueAtIndex(i) * decay);
         }
 
-        return new SoundPCM(buffer);
+        return new SoundPCM(buffer, input.SampleRate());
     }
 
     @Override
