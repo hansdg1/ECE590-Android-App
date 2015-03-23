@@ -20,7 +20,8 @@ public class EffectsController {
         EffectsMap.put(0, null);
         EffectsMap.put(1, null);
         EffectsMap.put(2, null);
-        EffectsMap.put(3, null);
+
+
     }
 
     public void AddEffect(IEffect effect)
@@ -37,10 +38,10 @@ public class EffectsController {
             }
         }
 
-        //if nothing was found. Throw it in spot 3 because it's in the center
+        //if nothing was found. Throw it in spot 1 because it's in the center
         if(!found){
-            EffectsMap.remove(3);
-            EffectsMap.put(3, effect);
+            EffectsMap.remove(1);
+            EffectsMap.put(1, effect);
         }
     }
 
