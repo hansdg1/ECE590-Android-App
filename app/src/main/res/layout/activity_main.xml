@@ -1,4 +1,169 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context=".MainActivity" tools:ignore="MergeRootFrame" />
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:id="@+id/GridLayoutTest"
+    android:focusableInTouchMode="false"
+    android:columnOrderPreserved="true"
+    android:rowOrderPreserved="true"
+    android:useDefaultMargins="false">
+
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Pitch"
+            android:id="@+id/textView2"
+            android:layout_column="0"
+            android:layout_span="2"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="25dp"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:baselineAligned="false">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="450dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/lorum_ipsum"
+            android:id="@+id/textView"
+            android:layout_column="0"
+            android:layout_span="3"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageView"
+            android:layout_column="3"
+            android:layout_span="2"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:background="#000000"
+            android:layout_gravity="top"
+            android:layout_marginBottom="30dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="138dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <ToggleButton
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:text="New ToggleButton"
+            android:id="@+id/toggleButton3"
+            android:textOff="Record"
+            android:textOn="Record"
+            android:textSize="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:clickable="true"
+            android:enabled="true"
+            android:textStyle="normal"
+            android:layout_gravity="center_vertical"
+            android:layout_column="0"
+            android:layout_span="1"
+            android:layout_weight=".2" />
+
+        <ToggleButton
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:text="reverb-button"
+            android:id="@+id/button2"
+            android:textOff="Reverb"
+            android:textOn="Reverb (Active)"
+            android:singleLine="false"
+            android:typeface="sans"
+            android:visibility="visible"
+            android:checked="false"
+            android:textSize="30dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:clickable="true"
+            android:enabled="true"
+            android:textStyle="normal"
+            android:layout_gravity="center_vertical" />
+
+        <ToggleButton
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:text="auto-tune-button"
+            android:id="@+id/toggleButton"
+            android:textOff="Auto-Tune"
+            android:textOn="Auto-Tune (Active)"
+            android:checked="true"
+            android:textSize="30dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:clickable="true"
+            android:enabled="true"
+            android:textStyle="normal"
+            android:visibility="visible"
+            android:typeface="sans"
+            android:layout_gravity="center_vertical" />
+
+        <ToggleButton
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:text="New ToggleButton"
+            android:id="@+id/toggleButton2"
+            android:textOff="Pitch"
+            android:textOn="Pitch (Active)"
+            android:checked="false"
+            android:textSize="30dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:clickable="true"
+            android:enabled="true"
+            android:textStyle="normal"
+            android:layout_gravity="center_vertical" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:text="Play"
+            android:id="@+id/button"
+            android:textSize="30dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:clickable="true"
+            android:enabled="true"
+            android:textStyle="normal"
+            android:layout_gravity="center_vertical" />
+
+    </TableRow>
+
+
+</TableLayout>
+
+
