@@ -19,6 +19,8 @@ public class ReverbEffect implements IEffect
     {
         this.decay = decay;
         this.delay = delay;
+
+
         this.frequency = (float)frequency/1000;
     }
 
@@ -30,7 +32,10 @@ public class ReverbEffect implements IEffect
 
         for(int i = 0; i < input.NumberOfSamples(); i++){
             buffer[i] += input.GetValueAtIndex(i);
+
+
             buffer[i + delaySamples] += (short)((float)input.GetValueAtIndex(i) * decay);
+
         }
 
         return new SoundPCM(buffer, input.SampleRate());

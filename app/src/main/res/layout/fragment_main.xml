@@ -7,6 +7,32 @@
     tools:context=".MainActivity$PlaceholderFragment">
 
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recordBtnText"
+        android:id="@+id/recordBtn"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginTop="56dp"
+        android:enabled="true"
+        android:clickable="true"
+        android:onClick="recordBtnOnClick" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/playBtnText"
+        android:id="@+id/playBtn"
+        android:clickable="true"
+        android:enabled="true"
+        android:onClick="playBtnOnClick"
+        android:layout_alignTop="@+id/recordBtn"
+        android:layout_toEndOf="@+id/textView" />
 
 </RelativeLayout>
