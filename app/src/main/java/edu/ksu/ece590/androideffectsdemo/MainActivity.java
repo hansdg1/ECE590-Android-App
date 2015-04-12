@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import android.os.Build;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -33,6 +34,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import edu.ksu.ece590.androideffectsdemo.effects.EffectsController;
+import edu.ksu.ece590.androideffectsdemo.effects.HighPassEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.LowPassEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.ReverbEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.ReverseEffect;
@@ -206,6 +208,16 @@ public class MainActivity extends ActionBarActivity {
 
     private void playRecord(){
 
+
+        CheckBox reverbCheckbox = (CheckBox)findViewById(R.id.reverbCheckbox);
+        CheckBox reverseCheckbox = (CheckBox)findViewById(R.id.reverseCheckBox);
+        CheckBox lowpassCheckbox = (CheckBox)findViewById(R.id.lowPassCheckbox);
+        CheckBox highpassCheckbox = (CheckBox)findViewById(R.id.highPassCheckbox);
+
+
+
+
+
         File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
 
         int shortSizeInBytes = Short.SIZE/Byte.SIZE;
@@ -234,10 +246,29 @@ public class MainActivity extends ActionBarActivity {
 
             EffectsController eController = new EffectsController();
 
-            //add the effects
-            eController.AddEffect(new ReverbEffect(0.25f,250,44100));
-            eController.AddEffect(new LowPassEffect(100.0f, sound.NumberOfSamples()/sound.SampleRate()));
-            eController.AddEffect(new ReverseEffect());
+
+
+            if(reverbCheckbox.isChecked())
+            {
+                //add the effects
+                eController.AddEffect(new ReverbEffect(0.25f,250,44100));
+            }
+
+
+
+            if(lowpassCheckbox.isChecked())
+            {
+                eController.AddEffect((new LowPassEffect(100.0f, sound.NumberOfSamples()/sound.SampleRate())));
+            }
+            if(highpassCheckbox.isChecked())
+            {
+                eController.AddEffect((new HighPassEffect(100.0f, sound.NumberOfSamples()/sound.SampleRate())));
+            }
+            if(reverseCheckbox.isChecked())
+            {
+
+                eController.AddEffect(new ReverseEffect());
+            }
 
             sound = eController.CalculateEffects(sound);
 
