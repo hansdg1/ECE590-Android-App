@@ -8,7 +8,7 @@ import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 /**
  * Created by dab on 3/11/2015.
  */
-public class ReverbEffect implements IEffect
+/*public class ReverbEffect implements IEffect
 {
 
     float decay = .25f;
@@ -44,7 +44,6 @@ public class ReverbEffect implements IEffect
     @Override
     public String GetDescription(Context ctx) {
         return ctx.getResources().getString(R.string.reverb_effect_desc);
-    }
+    }*/
 
 
-}
