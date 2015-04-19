@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.CheckBox;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -40,14 +42,19 @@ import edu.ksu.ece590.androideffectsdemo.effects.ReverseEffect;
 import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 
 public class MainActivity extends ActionBarActivity {
+
+
     boolean recording = false;
     int sampleFreq = 44100;
 
     TextView MainContent;
     TextView TitleContent;
-    Button ReverbButton;
-    Button AutotuneButton;
-    Button PitchButton;
+    ToggleButton ReverbButton;
+    ToggleButton AutotuneButton;
+    ToggleButton PitchButton;
+
+    Button PlayButton;
+    Button RecordButton;
 
     /** Called when the activity is first created. */
     @Override
@@ -58,9 +65,12 @@ public class MainActivity extends ActionBarActivity {
         // find View-elements
         TitleContent = (TextView) findViewById(R.id.TitleContent);
         MainContent = (TextView) findViewById(R.id.MainContent);
-        ReverbButton = (Button) findViewById(R.id.ReverbButton);
-        AutotuneButton = (Button) findViewById(R.id.AutotuneButton);
-        PitchButton = (Button) findViewById(R.id.PitchButton);
+        ReverbButton = (ToggleButton) findViewById(R.id.ReverbButton);
+        AutotuneButton = (ToggleButton) findViewById(R.id.AutotuneButton);
+        PitchButton = (ToggleButton) findViewById(R.id.PitchButton);
+        PlayButton = (Button) findViewById(R.id.PlayButton);
+        RecordButton = (Button) findViewById(R.id.RecordButton);
+
 
         // create click listener
         View.OnClickListener ReverbClick = new View.OnClickListener() {
@@ -90,10 +100,64 @@ public class MainActivity extends ActionBarActivity {
             }
         };
 
+
+        View.OnClickListener PlayClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                RecordButton.setEnabled(false);
+                RecordButton.setClickable(false);
+                playRecord();
+
+                RecordButton.setEnabled(true);
+                RecordButton.setClickable(true);
+            }
+        };
+
+        View.OnClickListener RecordClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //if the button was pressed and we were recording, we want to stop
+                if(recording){
+                    RecordButton.setText("Record");
+                    PlayButton.setEnabled(true);
+                    PlayButton.setClickable(true);
+
+                    recording = false;
+
+
+
+                }else {
+                    //we were not recording, and we want to start
+                    RecordButton.setText("Stop");
+                    PlayButton.setEnabled(false);
+                    PlayButton.setClickable(false);
+
+                    Thread recordThread = new Thread(new Runnable(){
+
+                        @Override
+                        public void run() {
+                            //this should be locked.
+                            recording = true;
+                            startRecord();
+                        }
+
+                    });
+
+                    recordThread.start();
+
+                }
+            }
+        };
+
+
         // assign click listener to the OK button (btnOK)
         ReverbButton.setOnClickListener(ReverbClick);
         PitchButton.setOnClickListener(PitchClick);
         AutotuneButton.setOnClickListener(AutotuneClick);
+        PlayButton.setOnClickListener(PlayClick);
+        RecordButton.setOnClickListener(RecordClick);
     }
 
 
@@ -205,16 +269,6 @@ public class MainActivity extends ActionBarActivity {
 
     private void playRecord(){
 
-
-        CheckBox reverbCheckbox = (CheckBox)findViewById(R.id.reverbCheckbox);
-        CheckBox reverseCheckbox = (CheckBox)findViewById(R.id.reverseCheckBox);
-        CheckBox lowpassCheckbox = (CheckBox)findViewById(R.id.lowPassCheckbox);
-        CheckBox highpassCheckbox = (CheckBox)findViewById(R.id.highPassCheckbox);
-
-
-
-
-
         File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
 
         int shortSizeInBytes = Short.SIZE/Byte.SIZE;
@@ -245,13 +299,13 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-            if(reverbCheckbox.isChecked())
+            if(ReverbButton.isChecked())
             {
                 //add the effects
                 eController.AddEffect(new ReverbEffect(0.25f,250,44100));
             }
 
-
+/*
 
             if(lowpassCheckbox.isChecked())
             {
@@ -265,7 +319,7 @@ public class MainActivity extends ActionBarActivity {
             {
 
                 eController.AddEffect(new ReverseEffect());
-            }
+            }*/
 
             sound = eController.CalculateEffects(sound);
 
