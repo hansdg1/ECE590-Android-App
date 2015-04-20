@@ -143,7 +143,7 @@
             android:id="@+id/AutotuneButton"
             android:textOff="Auto-Tune"
             android:textOn="Auto-Tune (Active)"
-            android:checked="true"
+            android:checked="false"
             android:textSize="30dp"
             android:layout_marginLeft="22dp"
             android:layout_marginRight="22dp"
