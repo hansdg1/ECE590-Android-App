@@ -53,6 +53,11 @@ public class MainActivity extends ActionBarActivity {
     ToggleButton AutotuneButton;
     ToggleButton PitchButton;
 
+    ToggleButton LowPassButton;
+    ToggleButton HighPassButton;
+    ToggleButton ReverseButton;
+
+
     Button PlayButton;
     Button RecordButton;
 
@@ -68,6 +73,11 @@ public class MainActivity extends ActionBarActivity {
         ReverbButton = (ToggleButton) findViewById(R.id.ReverbButton);
         AutotuneButton = (ToggleButton) findViewById(R.id.AutotuneButton);
         PitchButton = (ToggleButton) findViewById(R.id.PitchButton);
+
+        LowPassButton = (ToggleButton) findViewById(R.id.lowpassFilterButton);
+        HighPassButton = (ToggleButton) findViewById(R.id.highpassButton);
+        ReverseButton = (ToggleButton) findViewById(R.id.reverseButton);
+
         PlayButton = (Button) findViewById(R.id.PlayButton);
         RecordButton = (Button) findViewById(R.id.RecordButton);
 
@@ -101,6 +111,34 @@ public class MainActivity extends ActionBarActivity {
         };
 
 
+        // create click listener
+        View.OnClickListener LowPassClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change text of the TextView (MainContent)
+                MainContent.setText(R.string.lowpass_effect_desc);
+                TitleContent.setText(R.string.lowpass_effect_name);
+            }
+        };
+
+        View.OnClickListener HighPassClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change text of the TextView (MainContent)
+                MainContent.setText(R.string.highpass_effect_desc);
+                TitleContent.setText(R.string.highpass_effect_name);
+            }
+        };
+
+        View.OnClickListener ReverseClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change text of the TextView (MainContent)
+                MainContent.setText(R.string.reverse_effect_desc);
+                TitleContent.setText(R.string.reverse_effect_name);
+            }
+        };
+
         View.OnClickListener PlayClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +146,10 @@ public class MainActivity extends ActionBarActivity {
 
                 RecordButton.setEnabled(false);
                 RecordButton.setClickable(false);
-                playRecord();
+
+
+                        playRecord();
+
 
                 RecordButton.setEnabled(true);
                 RecordButton.setClickable(true);
@@ -120,7 +161,7 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 //if the button was pressed and we were recording, we want to stop
                 if(recording){
-                    RecordButton.setText("Record");
+                    RecordButton.setText("Rec");
                     PlayButton.setEnabled(true);
                     PlayButton.setClickable(true);
 
@@ -143,6 +184,8 @@ public class MainActivity extends ActionBarActivity {
                             startRecord();
                         }
 
+
+
                     });
 
                     recordThread.start();
@@ -158,59 +201,13 @@ public class MainActivity extends ActionBarActivity {
         AutotuneButton.setOnClickListener(AutotuneClick);
         PlayButton.setOnClickListener(PlayClick);
         RecordButton.setOnClickListener(RecordClick);
-    }
 
+        LowPassButton.setOnClickListener(LowPassClick);
+        HighPassButton.setOnClickListener(HighPassClick);
+        ReverseButton.setOnClickListener(ReverseClick);
 
-
-    public void recordBtnOnClick(View v) {
-
-        Button recBtn = (Button)findViewById(R.id.recordBtn);
-        Button playBtn = (Button)findViewById(R.id.playBtn);
-
-        //if the button was pressed and we were recording, we want to stop
-        if(recording){
-            recBtn.setText("Record");
-            playBtn.setEnabled(true);
-
-
-            recording = false;
-
-
-
-        }else {
-        //we were not recording, and we want to start
-            recBtn.setText("Stop");
-            playBtn.setEnabled(false);
-
-            Thread recordThread = new Thread(new Runnable(){
-
-                @Override
-                public void run() {
-                    //this should be locked.
-                    recording = true;
-                    startRecord();
-                }
-
-            });
-
-            recordThread.start();
-
-        }
 
     }
-
-    public void playBtnOnClick(View v) {
-
-        Button recBtn = (Button)findViewById(R.id.recordBtn);
-        Button playBtn = (Button)findViewById(R.id.playBtn);
-
-        recBtn.setEnabled(false);
-
-        playRecord();
-
-        recBtn.setEnabled(true);
-    }
-
 
 
     private void startRecord(){
@@ -304,22 +301,19 @@ public class MainActivity extends ActionBarActivity {
                 //add the effects
                 eController.AddEffect(new ReverbEffect(0.25f,250,44100));
             }
-
-/*
-
-            if(lowpassCheckbox.isChecked())
+            if(LowPassButton.isChecked())
             {
                 eController.AddEffect((new LowPassEffect(100.0f, sound.NumberOfSamples()/sound.SampleRate())));
             }
-            if(highpassCheckbox.isChecked())
+            if(HighPassButton.isChecked())
             {
                 eController.AddEffect((new HighPassEffect(100.0f, sound.NumberOfSamples()/sound.SampleRate())));
             }
-            if(reverseCheckbox.isChecked())
+            if(ReverseButton.isChecked())
             {
 
                 eController.AddEffect(new ReverseEffect());
-            }*/
+            }
 
             sound = eController.CalculateEffects(sound);
 
