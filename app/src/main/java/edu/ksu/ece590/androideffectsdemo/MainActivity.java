@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.os.Build;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ import edu.ksu.ece590.androideffectsdemo.effects.HighPassEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.LowPassEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.ReverbEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.ReverseEffect;
+import edu.ksu.ece590.androideffectsdemo.renders.CustomDrawableView;
 import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 
 public class MainActivity extends ActionBarActivity {
@@ -61,11 +64,21 @@ public class MainActivity extends ActionBarActivity {
     Button PlayButton;
     Button RecordButton;
 
+
+    CustomDrawableView customDrawableView;
+
+    AudioPlayTask audioTask;
+
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
 
         // find View-elements
         TitleContent = (TextView) findViewById(R.id.TitleContent);
@@ -81,6 +94,8 @@ public class MainActivity extends ActionBarActivity {
         PlayButton = (Button) findViewById(R.id.PlayButton);
         RecordButton = (Button) findViewById(R.id.RecordButton);
 
+
+        customDrawableView = (CustomDrawableView) findViewById(R.id.view);
 
         // create click listener
         View.OnClickListener ReverbClick = new View.OnClickListener() {
@@ -264,88 +279,106 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+
+
+    private class AudioPlayTask extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            try {
+
+                File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
+
+                int shortSizeInBytes = Short.SIZE / Byte.SIZE;
+                int bufferSizeInBytes = (int) (file.length() / shortSizeInBytes);
+
+                short[] audioData = new short[bufferSizeInBytes];
+
+                InputStream inputStream = new FileInputStream(file);
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+                DataInputStream dataInputStream = new DataInputStream(bufferedInputStream);
+
+                int i = 0;
+                while (dataInputStream.available() > 0) {
+                    audioData[i] += dataInputStream.readShort();
+
+                    i++;
+                }
+
+                dataInputStream.close();
+
+                //Just something to test with. This should all be refactored
+                SoundPCM sound = new SoundPCM(audioData, sampleFreq);
+
+                EffectsController eController = new EffectsController();
+
+
+                if (ReverbButton.isChecked()) {
+                    //add the effects
+                    eController.AddEffect(new ReverbEffect(0.25f, 250, 44100));
+                }
+                if (LowPassButton.isChecked()) {
+                    eController.AddEffect((new LowPassEffect(100.0f, sound.NumberOfSamples() / sound.SampleRate())));
+                }
+                if (HighPassButton.isChecked()) {
+                    eController.AddEffect((new HighPassEffect(100.0f, sound.NumberOfSamples() / sound.SampleRate())));
+                }
+                if (ReverseButton.isChecked()) {
+
+                    eController.AddEffect(new ReverseEffect());
+                }
+
+                sound = eController.CalculateEffects(sound);
+
+
+
+
+                int minSize = AudioTrack.getMinBufferSize(sampleFreq, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT);
+
+                AudioTrack audioTrack = new AudioTrack(
+                        AudioManager.STREAM_MUSIC,
+                        sampleFreq,
+                        AudioFormat.CHANNEL_OUT_MONO,
+                        AudioFormat.ENCODING_PCM_16BIT,
+
+                        minSize,
+                        AudioTrack.MODE_STREAM);
+
+                customDrawableView.update(audioTrack, sound);
+
+                audioTrack.play();
+
+
+                audioTrack.write(sound.GetBuffer(), 0,sound.GetBuffer().length);
+
+                audioTrack.stop();
+                audioTrack.release();
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+    }
+
+
+
+
+
     private void playRecord(){
 
-        File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
 
-        int shortSizeInBytes = Short.SIZE/Byte.SIZE;
-        int bufferSizeInBytes = (int)(file.length()/shortSizeInBytes);
-
-        short[] audioData = new short[bufferSizeInBytes];
-
-        try {
-            InputStream inputStream = new FileInputStream(file);
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-            DataInputStream dataInputStream = new DataInputStream(bufferedInputStream);
-
-            int i = 0;
-            while(dataInputStream.available() > 0) {
-                audioData[i] += dataInputStream.readShort();
-
-                i++;
-            }
-
-            dataInputStream.close();
+        audioTask = new AudioPlayTask();
+        audioTask.execute();
 
 
 
-            //Just something to test with. This should all be refactored
-            SoundPCM sound = new SoundPCM(audioData,44100);
-
-            EffectsController eController = new EffectsController();
-
-
-
-            if(ReverbButton.isChecked())
-            {
-                //add the effects
-                eController.AddEffect(new ReverbEffect(0.25f,250,44100));
-            }
-            if(LowPassButton.isChecked())
-            {
-                eController.AddEffect((new LowPassEffect(100.0f, sound.NumberOfSamples()/sound.SampleRate())));
-            }
-            if(HighPassButton.isChecked())
-            {
-                eController.AddEffect((new HighPassEffect(100.0f, sound.NumberOfSamples()/sound.SampleRate())));
-            }
-            if(ReverseButton.isChecked())
-            {
-
-                eController.AddEffect(new ReverseEffect());
-            }
-
-            sound = eController.CalculateEffects(sound);
-
-
-
-
-            final String promptPlayRecord =
-                    "PlayRecord()\n"
-                            + file.getAbsolutePath() + "\n";
-
-            Toast.makeText(MainActivity.this,
-                    promptPlayRecord,
-                    Toast.LENGTH_LONG).show();
-
-            AudioTrack audioTrack = new AudioTrack(
-                    AudioManager.STREAM_MUSIC,
-                    sampleFreq,
-                    AudioFormat.CHANNEL_OUT_MONO,
-                    AudioFormat.ENCODING_PCM_16BIT,
-                    sound.GetBufferSizeInBytes(),
-                    AudioTrack.MODE_STREAM);
-
-
-            audioTrack.play();
-            audioTrack.write(sound.GetBuffer(), 0, sound.NumberOfSamples());
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

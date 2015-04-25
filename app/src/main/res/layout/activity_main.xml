@@ -83,7 +83,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="611dp"
@@ -96,17 +97,17 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="10dp" />
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/imageView"
-                android:layout_column="3"
-                android:layout_span="2"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:background="#000000"
-                android:layout_gravity="top"
-                android:layout_marginBottom="30dp" />
+            <view
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="edu.ksu.ece590.androideffectsdemo.renders.CustomDrawableView"
+                android:id="@+id/view"
+                android:minHeight="20dp"
+                android:minWidth="20dp"
+                android:visibility="visible"
+                android:background="@color/background_material_dark"
+                style="@style/AppTheme" />
+
         </LinearLayout>
 
     </TableRow>
