@@ -1,5 +1,6 @@
 package edu.ksu.ece590.androideffectsdemo;
 
+import android.graphics.Color;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
@@ -53,9 +54,6 @@ public class MainActivity extends ActionBarActivity {
     TextView MainContent;
     TextView TitleContent;
     ToggleButton ReverbButton;
-    ToggleButton AutotuneButton;
-    ToggleButton PitchButton;
-
     ToggleButton LowPassButton;
     ToggleButton HighPassButton;
     ToggleButton ReverseButton;
@@ -84,8 +82,6 @@ public class MainActivity extends ActionBarActivity {
         TitleContent = (TextView) findViewById(R.id.TitleContent);
         MainContent = (TextView) findViewById(R.id.MainContent);
         ReverbButton = (ToggleButton) findViewById(R.id.ReverbButton);
-        AutotuneButton = (ToggleButton) findViewById(R.id.AutotuneButton);
-        PitchButton = (ToggleButton) findViewById(R.id.PitchButton);
 
         LowPassButton = (ToggleButton) findViewById(R.id.lowpassFilterButton);
         HighPassButton = (ToggleButton) findViewById(R.id.highpassButton);
@@ -104,6 +100,11 @@ public class MainActivity extends ActionBarActivity {
                 // change text of the TextView (MainContent)
                 MainContent.setText(R.string.reverb_text);
                 TitleContent.setText(R.string.reverb_title);
+                if (ReverbButton.isChecked()) {
+                    //add the effects
+                    ReverbButton.setBackgroundColor(Color.GREEN);
+                }
+                else ReverbButton.setBackgroundColor(Color.LTGRAY);
             }
         };
 
@@ -177,6 +178,7 @@ public class MainActivity extends ActionBarActivity {
                 //if the button was pressed and we were recording, we want to stop
                 if(recording){
                     RecordButton.setText("Rec");
+                    RecordButton.setBackgroundColor(Color.LTGRAY);
                     PlayButton.setEnabled(true);
                     PlayButton.setClickable(true);
 
@@ -187,6 +189,7 @@ public class MainActivity extends ActionBarActivity {
                 }else {
                     //we were not recording, and we want to start
                     RecordButton.setText("Stop");
+                    RecordButton.setBackgroundColor(Color.RED);
                     PlayButton.setEnabled(false);
                     PlayButton.setClickable(false);
 
@@ -212,8 +215,6 @@ public class MainActivity extends ActionBarActivity {
 
         // assign click listener to the OK button (btnOK)
         ReverbButton.setOnClickListener(ReverbClick);
-        PitchButton.setOnClickListener(PitchClick);
-        AutotuneButton.setOnClickListener(AutotuneClick);
         PlayButton.setOnClickListener(PlayClick);
         RecordButton.setOnClickListener(RecordClick);
 
