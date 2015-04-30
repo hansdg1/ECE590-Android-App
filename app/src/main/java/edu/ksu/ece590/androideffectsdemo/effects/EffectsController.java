@@ -60,6 +60,7 @@ public class EffectsController {
         EffectsMap.put(index2, temp);
     }
 
+    /*
     public String GetEffectName(Integer key, Context ctx)
     {
         if(EffectsMap.containsKey(key)) {
@@ -85,6 +86,7 @@ public class EffectsController {
         //if we got here, just return an empty string.
         return "";
     }
+    */
 
     //loop through and calculate the effects
     public SoundPCM CalculateEffects(SoundPCM input)

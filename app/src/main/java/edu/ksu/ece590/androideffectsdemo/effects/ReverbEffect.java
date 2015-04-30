@@ -39,15 +39,6 @@ public class ReverbEffect implements IEffect {
         return new SoundPCM(buffer, input.SampleRate());
     }
 
-    @Override
-    public String GetName(Context ctx) {
-        return ctx.getResources().getString(R.string.reverb_effect_name);
-    }
-
-    @Override
-    public String GetDescription(Context ctx) {
-        return ctx.getResources().getString(R.string.reverb_effect_desc);
-    }
 }
 
 

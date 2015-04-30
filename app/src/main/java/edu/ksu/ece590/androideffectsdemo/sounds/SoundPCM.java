@@ -11,24 +11,35 @@ public class SoundPCM {
     int SampleRate;
 
     //default constructor
-    public SoundPCM(){
+    public SoundPCM() {
         buffer = new short[10];
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             buffer[i] = 0;
         }
 
         SampleRate = 44100;
     }
+
     //copy constructor
-    public SoundPCM(SoundPCM aSoundPCM)
-    {
+    public SoundPCM(SoundPCM aSoundPCM) {
         this(aSoundPCM.GetBuffer(), aSoundPCM.SampleRate());
     }
 
     //alternate constructor
-    public SoundPCM(short[] input, int sampleRate){
+    public SoundPCM(short[] input, int sampleRate) {
 
         buffer = input;
+        SampleRate = sampleRate;
+    }
+
+    //alternate constructor
+    public SoundPCM(int length, int sampleRate)
+    {
+        buffer = new short[length];
+        for (int i = 0; i < length; i++) {
+            buffer[i] = 0;
+        }
+
         SampleRate = sampleRate;
     }
 

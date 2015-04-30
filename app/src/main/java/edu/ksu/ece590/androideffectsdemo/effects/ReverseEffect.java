@@ -24,13 +24,4 @@ public class ReverseEffect implements IEffect {
 
     }
 
-    @Override
-    public String GetName(Context ctx) {
-        return ctx.getResources().getString(R.string.reverse_effect_name);
-    }
-
-    @Override
-    public String GetDescription(Context ctx) {
-        return ctx.getResources().getString(R.string.reverse_effect_desc);
-    }
 }

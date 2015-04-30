@@ -8,20 +8,10 @@ import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.os.Build;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.CheckBox;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -36,7 +26,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import edu.ksu.ece590.androideffectsdemo.effects.DoubleSampleEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.EffectsController;
+import edu.ksu.ece590.androideffectsdemo.effects.HalveSampleEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.HighPassEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.LowPassEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.ReverbEffect;
@@ -53,8 +46,8 @@ public class MainActivity extends ActionBarActivity {
     TextView MainContent;
     TextView TitleContent;
     ToggleButton ReverbButton;
-    ToggleButton AutotuneButton;
-    ToggleButton PitchButton;
+    ToggleButton DoubleSampleButton;
+    ToggleButton HalveSampleButton;
 
     ToggleButton LowPassButton;
     ToggleButton HighPassButton;
@@ -84,8 +77,8 @@ public class MainActivity extends ActionBarActivity {
         TitleContent = (TextView) findViewById(R.id.TitleContent);
         MainContent = (TextView) findViewById(R.id.MainContent);
         ReverbButton = (ToggleButton) findViewById(R.id.ReverbButton);
-        AutotuneButton = (ToggleButton) findViewById(R.id.AutotuneButton);
-        PitchButton = (ToggleButton) findViewById(R.id.PitchButton);
+        DoubleSampleButton = (ToggleButton) findViewById(R.id.DoubleSampleButton);
+        HalveSampleButton = (ToggleButton) findViewById(R.id.HalveSampleButton);
 
         LowPassButton = (ToggleButton) findViewById(R.id.lowpassFilterButton);
         HighPassButton = (ToggleButton) findViewById(R.id.highpassButton);
@@ -98,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
         customDrawableView = (CustomDrawableView) findViewById(R.id.view);
 
         // create click listener
-        View.OnClickListener ReverbClick = new View.OnClickListener() {
+        final View.OnClickListener ReverbClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
@@ -107,21 +100,21 @@ public class MainActivity extends ActionBarActivity {
             }
         };
 
-        View.OnClickListener AutotuneClick = new View.OnClickListener() {
+        View.OnClickListener DoubleSampleClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
-                MainContent.setText(R.string.autotune_text);
-                TitleContent.setText(R.string.autotune_title);
+                MainContent.setText(R.string.double_sample_text);
+                TitleContent.setText(R.string.double_sample_title);
             }
         };
 
-        View.OnClickListener PitchClick = new View.OnClickListener() {
+        View.OnClickListener HalveSampleClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
-                MainContent.setText(R.string.pitch_text);
-                TitleContent.setText(R.string.pitch_title);
+                MainContent.setText(R.string.halve_sample_text);
+                TitleContent.setText(R.string.halve_sample_title);
             }
         };
 
@@ -190,6 +183,15 @@ public class MainActivity extends ActionBarActivity {
                     PlayButton.setEnabled(false);
                     PlayButton.setClickable(false);
 
+
+                    //reset the toggle buttons
+                    HalveSampleButton.setChecked(false);
+                    DoubleSampleButton.setChecked(false);
+                    LowPassButton.setChecked(false);
+                    HighPassButton.setChecked(false);
+                    ReverseButton.setChecked(false);
+                    ReverbButton.setChecked(false);
+
                     Thread recordThread = new Thread(new Runnable(){
 
                         @Override
@@ -212,8 +214,8 @@ public class MainActivity extends ActionBarActivity {
 
         // assign click listener to the OK button (btnOK)
         ReverbButton.setOnClickListener(ReverbClick);
-        PitchButton.setOnClickListener(PitchClick);
-        AutotuneButton.setOnClickListener(AutotuneClick);
+        HalveSampleButton.setOnClickListener(HalveSampleClick);
+        DoubleSampleButton.setOnClickListener(DoubleSampleClick);
         PlayButton.setOnClickListener(PlayClick);
         RecordButton.setOnClickListener(RecordClick);
 
@@ -313,6 +315,21 @@ public class MainActivity extends ActionBarActivity {
 
                 EffectsController eController = new EffectsController();
 
+                if (HalveSampleButton.isChecked())
+                {
+                    eController.AddEffect(new HalveSampleEffect());
+                    //Halve the sample effect
+                }
+
+                //Leave like this to demonstrate signal loss/degradation.
+                //I.e We lost part of the signal from halving. It cannot be regained by doubling.
+
+                if (DoubleSampleButton.isChecked())
+                {
+                    eController.AddEffect(new DoubleSampleEffect());
+                    //Double the sample effect
+
+                }
 
                 if (ReverbButton.isChecked()) {
                     //add the effects
@@ -328,6 +345,7 @@ public class MainActivity extends ActionBarActivity {
 
                     eController.AddEffect(new ReverseEffect());
                 }
+
 
                 sound = eController.CalculateEffects(sound);
 

@@ -92,10 +92,10 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/lorum_ipsum"
                 android:id="@+id/MainContent"
-                android:layout_column="0"
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center_vertical" />
 
             <view
                 android:layout_width="match_parent"
@@ -144,11 +144,47 @@
             <ToggleButton
                 android:layout_width="112dp"
                 android:layout_height="112dp"
+                android:text="Halve Samples"
+                android:id="@+id/HalveSampleButton"
+                android:textOff="Halve Samples"
+                android:textOn="Halve Samples"
+                android:checked="false"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:clickable="true"
+                android:enabled="true"
+                android:textStyle="normal"
+                android:visibility="visible"
+                android:typeface="sans"
+                android:layout_marginLeft="40dp"
+                android:layout_gravity="center" />
+
+            <ToggleButton
+                android:layout_width="112dp"
+                android:layout_height="112dp"
+                android:text="Double Samples"
+                android:id="@+id/DoubleSampleButton"
+                android:textOff="Double Samples"
+                android:textOn="Double Samples"
+                android:checked="false"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:clickable="true"
+                android:enabled="true"
+                android:textStyle="normal"
+                android:layout_marginLeft="40dp"
+                android:typeface="sans"
+                android:layout_gravity="center" />
+
+            <ToggleButton
+                android:layout_width="112dp"
+                android:layout_height="112dp"
                 android:text="Low Pass"
                 android:id="@+id/lowpassFilterButton"
                 android:layout_marginLeft="40dp"
                 android:textOff="Low Pass"
-                android:textOn="Low Pass" />
+                android:textOn="Low Pass"
+                android:typeface="sans" />
 
             <ToggleButton
                 android:layout_width="112dp"
@@ -158,7 +194,8 @@
                 android:layout_weight=".2"
                 android:layout_marginLeft="40dp"
                 android:textOff="High Pass"
-                android:textOn="High Pass" />
+                android:textOn="High Pass"
+                android:typeface="sans" />
 
             <ToggleButton
                 android:layout_width="112dp"
@@ -167,7 +204,8 @@
                 android:id="@+id/reverseButton"
                 android:layout_marginLeft="40dp"
                 android:textOn="Reverse"
-                android:textOff="Reverse" />
+                android:textOff="Reverse"
+                android:typeface="sans" />
 
             <ToggleButton
                 android:layout_width="112dp"
@@ -179,40 +217,6 @@
                 android:singleLine="false"
                 android:typeface="sans"
                 android:visibility="visible"
-                android:checked="false"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="0dp"
-                android:clickable="true"
-                android:enabled="true"
-                android:textStyle="normal"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="40dp" />
-
-            <ToggleButton
-                android:layout_width="112dp"
-                android:layout_height="112dp"
-                android:text="Auto Tune"
-                android:id="@+id/AutotuneButton"
-                android:textOff="Auto-Tune"
-                android:textOn="Auto-Tune"
-                android:checked="false"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="0dp"
-                android:clickable="true"
-                android:enabled="true"
-                android:textStyle="normal"
-                android:visibility="visible"
-                android:typeface="sans"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="40dp" />
-
-            <ToggleButton
-                android:layout_width="112dp"
-                android:layout_height="112dp"
-                android:text="Pitch"
-                android:id="@+id/PitchButton"
-                android:textOff="Pitch"
-                android:textOn="Pitch"
                 android:checked="false"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
