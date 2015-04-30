@@ -74,10 +74,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
         // find View-elements
         TitleContent = (TextView) findViewById(R.id.TitleContent);
         MainContent = (TextView) findViewById(R.id.MainContent);
@@ -100,29 +96,6 @@ public class MainActivity extends ActionBarActivity {
                 // change text of the TextView (MainContent)
                 MainContent.setText(R.string.reverb_text);
                 TitleContent.setText(R.string.reverb_title);
-                if (ReverbButton.isChecked()) {
-                    //add the effects
-                    ReverbButton.setBackgroundColor(Color.GREEN);
-                }
-                else ReverbButton.setBackgroundColor(Color.LTGRAY);
-            }
-        };
-
-        View.OnClickListener AutotuneClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // change text of the TextView (MainContent)
-                MainContent.setText(R.string.autotune_text);
-                TitleContent.setText(R.string.autotune_title);
-            }
-        };
-
-        View.OnClickListener PitchClick = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // change text of the TextView (MainContent)
-                MainContent.setText(R.string.pitch_text);
-                TitleContent.setText(R.string.pitch_title);
             }
         };
 

@@ -25,7 +25,7 @@
             android:weightSum="1">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="650dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Pitch"
@@ -35,8 +35,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="25dp"
                 android:textSize="50sp"
-                android:textStyle="bold"
-                android:layout_weight="0.75" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="300dp"
@@ -146,60 +145,46 @@
                 android:enabled="true"
                 android:textStyle="normal"
                 android:layout_gravity="center_vertical"
-                android:layout_column="0"
-                android:layout_span="1"
                 android:checked="false"
                 android:layout_marginLeft="50dp" />
 
             <ToggleButton
                 android:layout_width="185dp"
                 android:layout_height="112dp"
-                android:text="Low Pass"
-                android:id="@+id/lowpassFilterButton"
-                android:layout_marginLeft="40dp"
                 android:textOff="Low Pass"
                 android:textOn="Low Pass"
-                android:textSize="25dp"
-                android:checked="false" />
-
-            <ToggleButton
-                android:layout_width="185dp"
-                android:layout_height="112dp"
-                android:text="High Pass"
-                android:id="@+id/highpassButton"
+                android:background="@drawable/selector"
+                android:id="@+id/lowpassFilterButton"
                 android:layout_marginLeft="40dp"
-                android:textOff="High Pass"
-                android:textOn="High Pass"
-                android:textSize="25dp"
-                android:nestedScrollingEnabled="false" />
-
-            <ToggleButton
-                android:layout_width="185dp"
-                android:layout_height="112dp"
-                android:text="Reverse"
-                android:id="@+id/reverseButton"
-                android:layout_marginLeft="40dp"
-                android:textOn="Reverse"
-                android:textOff="Reverse"
                 android:textSize="25dp" />
 
             <ToggleButton
                 android:layout_width="185dp"
                 android:layout_height="112dp"
-                android:text="Reverb"
-                android:id="@+id/ReverbButton"
+                android:textOff="High Pass"
+                android:textOn="High Pass"
+                android:background="@drawable/selector"
+                android:id="@+id/highpassButton"
+                android:layout_marginLeft="40dp"
+                android:textSize="25dp" />
+
+            <ToggleButton
+                android:layout_width="185dp"
+                android:layout_height="112dp"
+                android:textOff="Reverse"
+                android:textOn="Reverse"
+                android:background="@drawable/selector"
+                android:id="@+id/reverseButton"
+                android:layout_marginLeft="40dp"
+                android:textSize="25dp" />
+
+            <ToggleButton
+                android:layout_width="185dp"
+                android:layout_height="112dp"
                 android:textOff="Reverb"
                 android:textOn="Reverb"
-                android:singleLine="false"
-                android:typeface="sans"
-                android:visibility="visible"
-                android:checked="false"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="0dp"
-                android:clickable="true"
-                android:enabled="true"
-                android:textStyle="normal"
-                android:layout_gravity="center_vertical"
+                android:background="@drawable/selector"
+                android:id="@+id/ReverbButton"
                 android:layout_marginLeft="40dp"
                 android:textSize="25dp" />
 

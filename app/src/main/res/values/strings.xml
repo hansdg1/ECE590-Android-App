@@ -23,12 +23,4 @@
     <string name="reverb_text">Reverb works!</string>
 
     <string name="reverb_title">Reverb</string>
-
-    <string name="autotune_text">Autotune :(</string>
-
-    <string name="autotune_title">Auto-Tune</string>
-
-    <string name="pitch_text">Pitch :(</string>
-
-    <string name="pitch_title">Pitch</string>
 </resources>
