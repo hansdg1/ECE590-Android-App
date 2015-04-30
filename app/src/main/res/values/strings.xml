@@ -23,4 +23,5 @@
     <string name="reverb_text">Reverb works!</string>
 
     <string name="reverb_title">Reverb</string>
+    <string name="title_activity_display_tutorial">DisplayTutorial</string>
 </resources>

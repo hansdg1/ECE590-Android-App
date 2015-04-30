@@ -53,6 +53,7 @@
                 android:text="Tutorial / Help"
                 android:id="@+id/button"
                 android:textSize="20dp"
+                android:onClick="openTutorial"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="-150dp" />
         </LinearLayout>

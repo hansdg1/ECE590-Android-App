@@ -1,5 +1,6 @@
 package edu.ksu.ece590.androideffectsdemo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -341,10 +342,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
-
-
-
     private void playRecord(){
 
 
@@ -353,6 +350,11 @@ public class MainActivity extends ActionBarActivity {
 
 
 
+    }
+
+    public void openTutorial(View view) {
+        Intent intent = new Intent(this, DisplayTutorial.class);
+        startActivity(intent);
     }
 
 }
