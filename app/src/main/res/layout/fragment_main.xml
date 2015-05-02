@@ -7,65 +7,47 @@
     tools:context=".MainActivity$PlaceholderFragment"
     >
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
+    <TabHost
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tabHost"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recordBtnText"
-        android:id="@+id/recordBtn"
-        android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="56dp"
-        android:enabled="true"
-        android:clickable="true"
-        android:onClick="recordBtnOnClick" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/playBtnText"
-        android:id="@+id/playBtn"
-        android:clickable="true"
-        android:enabled="true"
-        android:onClick="playBtnOnClick"
-        android:layout_alignTop="@+id/recordBtn"
-        android:layout_toEndOf="@+id/textView" />
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"></TabWidget>
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reverb"
-        android:id="@+id/reverbCheckbox"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/recordBtn" />
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Low Pass Filter"
-        android:id="@+id/lowPassCheckbox"
-        android:layout_below="@+id/reverbCheckbox"
-        android:layout_alignStart="@+id/reverbCheckbox" />
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"></LinearLayout>
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="High Pass Filter"
-        android:id="@+id/highPassCheckbox"
-        android:layout_below="@+id/lowPassCheckbox"
-        android:layout_alignStart="@+id/lowPassCheckbox" />
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"></LinearLayout>
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reverse"
-        android:id="@+id/reverseCheckBox"
-        android:layout_below="@+id/highPassCheckbox"
-        android:layout_alignStart="@+id/highPassCheckbox" />
-
+                <LinearLayout
+                    android:id="@+id/tab3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"></LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
 </RelativeLayout>

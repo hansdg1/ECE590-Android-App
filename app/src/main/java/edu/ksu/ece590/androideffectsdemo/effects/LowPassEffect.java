@@ -38,15 +38,7 @@ public class LowPassEffect implements IEffect
         return new SoundPCM(buffer, input.SampleRate());
     }
 
-    @Override
-    public String GetName(Context ctx) {
-        return ctx.getResources().getString(R.string.lowpass_effect_name);
-    }
 
-    @Override
-    public String GetDescription(Context ctx) {
-        return ctx.getResources().getString(R.string.lowpass_effect_desc);
-    }
 
 
 }

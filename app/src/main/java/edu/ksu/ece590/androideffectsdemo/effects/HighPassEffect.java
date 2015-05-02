@@ -11,8 +11,8 @@ import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 public class HighPassEffect implements IEffect
 {
 
-    float rc = .25f;
-    float dt = 1; //time interval
+    float rc = .00001f;
+    float dt = .001f; //time interval
 
 
     public HighPassEffect(float rc, int dt)
@@ -38,15 +38,6 @@ public class HighPassEffect implements IEffect
         return new SoundPCM(buffer, input.SampleRate());
     }
 
-    @Override
-    public String GetName(Context ctx) {
-        return ctx.getResources().getString(R.string.highpass_effect_name);
-    }
-
-    @Override
-    public String GetDescription(Context ctx) {
-        return ctx.getResources().getString(R.string.highpass_effect_desc);
-    }
 
 
 }

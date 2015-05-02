@@ -11,6 +11,10 @@
     <string name="highpass_effect_desc">An audio effect that...</string>
     <string name="reverse_effect_name">Reverse</string>
     <string name="reverse_effect_desc">An audio effect that...</string>
+
+
+
+
     <string name="recordBtnText">Record</string>
     <string name="playBtnText">Play</string>
     
@@ -20,11 +24,11 @@
 
     <string name="reverb_title">Reverb</string>
 
-    <string name="autotune_text">Autotune works!</string>
+    <string name="halve_sample_text">Halve Sample</string>
 
-    <string name="autotune_title">Auto-Tune</string>
+    <string name="halve_sample_title">Halve Sample</string>
 
-    <string name="pitch_text">Pitch works!</string>
+    <string name="double_sample_text">Double Sample</string>
 
-    <string name="pitch_title">Pitch</string>
+    <string name="double_sample_title">Double Sample</string>
 </resources>

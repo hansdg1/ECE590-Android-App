@@ -10,6 +10,6 @@ import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 public interface IEffect {
     SoundPCM Calculate(SoundPCM input);
 
-    String GetName(Context ctx);
-    String GetDescription(Context ctx);
+//    String GetName(Context ctx);
+//    String GetDescription(Context ctx);
 }
