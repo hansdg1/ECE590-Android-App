@@ -19,15 +19,16 @@ public class DisplayTutorial extends ActionBarActivity {
 
     TextView MainContent;
     TextView TitleContent;
+
     Button ReverbButton;
     Button LowPassButton;
     Button HighPassButton;
     Button ReverseButton;
-
-
+    Button DoubleButton;
+    Button HalveButton;
     Button AppButton;
-    Button RecordButton;
-
+    Button EnggButton;
+    Button BasicsButton;
 
     CustomDrawableView customDrawableView;
 
@@ -37,59 +38,106 @@ public class DisplayTutorial extends ActionBarActivity {
         setContentView(R.layout.activity_display_tutorial);
 
         // find View-elements
-        //TitleContent = (TextView) findViewById(R.id.TitleContent);
-        //MainContent = (TextView) findViewById(R.id.MainContent);
-        //ReverbButton = (ToggleButton) findViewById(R.id.ReverbButton);
+        TitleContent = (TextView) findViewById(R.id.TitleContent);
+        MainContent = (TextView) findViewById(R.id.MainContent);
 
-        //LowPassButton = (ToggleButton) findViewById(R.id.lowpassFilterButton);
-       // HighPassButton = (ToggleButton) findViewById(R.id.highpassButton);
-       // ReverseButton = (ToggleButton) findViewById(R.id.reverseButton);
-
+        // find buttons
+        ReverbButton = (Button) findViewById(R.id.ReverbButton);
+        LowPassButton = (Button) findViewById(R.id.LowpassButton);
+        HighPassButton = (Button) findViewById(R.id.HighpassButton);
+        ReverseButton = (Button) findViewById(R.id.ReverseButton);
         AppButton = (Button) findViewById(R.id.AppButton);
-        //RecordButton = (Button) findViewById(R.id.RecordButton);
+        DoubleButton = (Button) findViewById(R.id.DoubleButton);
+        HalveButton = (Button) findViewById(R.id.HalveButton);
+        EnggButton = (Button) findViewById(R.id.EnggButton);
+        BasicsButton = (Button) findViewById(R.id.BasicsButton);
 
 
         customDrawableView = (CustomDrawableView) findViewById(R.id.view);
 
-        // create click listener
-       /* View.OnClickListener ReverbClick = new View.OnClickListener() {
+        // create click listeners
+        //Reverb Click
+        View.OnClickListener ReverbClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
-                MainContent.setText(R.string.reverb_text);
-                TitleContent.setText(R.string.reverb_title);
+                MainContent.setText(R.string.reverb_tutorial);
+                TitleContent.setText(R.string.reverb_effect_name);
             }
         };
 
 
-        // create click listener
+        // Lowpass Click
         View.OnClickListener LowPassClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
-                MainContent.setText(R.string.lowpass_effect_desc);
+                MainContent.setText(R.string.lowpass_tutorial);
                 TitleContent.setText(R.string.lowpass_effect_name);
             }
         };
 
+        // Highpass Click
         View.OnClickListener HighPassClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
-                MainContent.setText(R.string.highpass_effect_desc);
+                MainContent.setText(R.string.highpass_tutorial);
                 TitleContent.setText(R.string.highpass_effect_name);
             }
         };
 
+        // Reverse Click
         View.OnClickListener ReverseClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
-                MainContent.setText(R.string.reverse_effect_desc);
+                MainContent.setText(R.string.reverse_tutorial);
                 TitleContent.setText(R.string.reverse_effect_name);
             }
         };
-        */
+
+        // Engineering Click
+        View.OnClickListener EnggClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change text of the TextView (MainContent)
+                MainContent.setText(R.string.engg_tutorial);
+                TitleContent.setText(R.string.engg_effect_name);
+            }
+        };
+
+        // Basics Click
+        View.OnClickListener BasicsClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change text of the TextView (MainContent)
+                MainContent.setText(R.string.appinfo_tutorial);
+                TitleContent.setText(R.string.appinfo_effect_name);
+            }
+        };
+
+        // Halve Click
+        View.OnClickListener HalveClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change text of the TextView (MainContent)
+                MainContent.setText(R.string.halve_tutorial);
+                TitleContent.setText(R.string.halve_effect_name);
+            }
+        };
+
+        //Double Click
+        View.OnClickListener DoubleClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change text of the TextView (MainContent)
+                MainContent.setText(R.string.double_tutorial);
+                TitleContent.setText(R.string.double_effect_name);
+            }
+        };
+
+        // Back to Application button click
         View.OnClickListener AppClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,13 +147,15 @@ public class DisplayTutorial extends ActionBarActivity {
         };
 
         // assign click listener to the OK button (btnOK)
-        //ReverbButton.setOnClickListener(ReverbClick);
+        ReverbButton.setOnClickListener(ReverbClick);
         AppButton.setOnClickListener(AppClick);
-        /*RecordButton.setOnClickListener(RecordClick);
-
         LowPassButton.setOnClickListener(LowPassClick);
         HighPassButton.setOnClickListener(HighPassClick);
-        ReverseButton.setOnClickListener(ReverseClick); */
+        ReverseButton.setOnClickListener(ReverseClick);
+        EnggButton.setOnClickListener(EnggClick);
+        HalveButton.setOnClickListener(HalveClick);
+        DoubleButton.setOnClickListener(DoubleClick);
+        BasicsButton.setOnClickListener(BasicsClick);
     }
 
 }

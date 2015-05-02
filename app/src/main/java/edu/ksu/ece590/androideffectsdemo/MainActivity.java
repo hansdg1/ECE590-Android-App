@@ -95,8 +95,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
-                MainContent.setText(R.string.reverb_text);
-                TitleContent.setText(R.string.reverb_title);
+                MainContent.setText(R.string.reverb_effect_desc);
+                TitleContent.setText(R.string.reverb_effect_name);
             }
         };
 

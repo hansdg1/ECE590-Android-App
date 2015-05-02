@@ -28,7 +28,7 @@
                 android:layout_width="650dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Pitch"
+                android:text="@string/start_title"
                 android:id="@+id/TitleContent"
                 android:layout_column="0"
                 android:layout_span="2"
@@ -76,10 +76,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Funded by: Kansas State University - College of Engineering"
                 android:id="@+id/textView4"
-                android:layout_column="3"
-                android:layout_span="2"
                 android:layout_marginTop="5dp"
-                android:autoText="false"
                 android:layout_marginLeft="700dp" />
         </LinearLayout>
     </TableRow>
@@ -99,12 +96,14 @@
                 android:layout_width="611dp"
                 android:layout_height="500dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/lorum_ipsum"
+                android:text="@string/start_text"
                 android:id="@+id/MainContent"
                 android:layout_column="0"
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="10dp"
+                android:textIsSelectable="false"
+                android:textSize="32dp" />
 
             <view
                 android:layout_width="match_parent"
