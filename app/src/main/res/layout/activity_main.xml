@@ -35,12 +35,8 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="25dp"
                 android:textSize="50sp"
-<<<<<<< HEAD
-                android:textStyle="bold"
-                android:layout_weight="0.99" />
-=======
                 android:textStyle="bold" />
->>>>>>> PaulUI
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,8 +47,6 @@
                 android:layout_column="3"
                 android:textSize="32dp"
                 android:textStyle="bold|italic" />
-<<<<<<< HEAD
-=======
 
             <Button
                 android:layout_width="240dp"
@@ -63,7 +57,7 @@
                 android:onClick="openTutorial"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="-150dp" />
->>>>>>> PaulUI
+
         </LinearLayout>
     </TableRow>
 
@@ -84,16 +78,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Funded by: Kansas State University - College of Engineering"
                 android:id="@+id/textView4"
-<<<<<<< HEAD
-                android:layout_column="3"
-                android:layout_span="2"
-                android:layout_marginTop="0dp"
-                android:autoText="false"
-                android:layout_marginLeft="800dp" />
-=======
+
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="700dp" />
->>>>>>> PaulUI
+
         </LinearLayout>
     </TableRow>
 
@@ -117,12 +105,12 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="10dp"
-<<<<<<< HEAD
-                android:layout_gravity="center_vertical" />
-=======
+
+                android:layout_gravity="center_vertical"
+
                 android:textIsSelectable="false"
                 android:textSize="32dp" />
->>>>>>> PaulUI
+
 
             <view
                 android:layout_width="match_parent"
@@ -206,34 +194,29 @@
                 android:layout_height="112dp"
                 android:textOff="Low Pass"
                 android:textOn="Low Pass"
-<<<<<<< HEAD
-                android:typeface="sans" />
-=======
+
+                android:typeface="sans"
+
                 android:background="@drawable/selector"
                 android:id="@+id/lowpassFilterButton"
                 android:layout_marginLeft="40dp"
                 android:textSize="25dp" />
->>>>>>> PaulUI
+
 
             <ToggleButton
                 android:layout_width="112dp"
                 android:layout_height="112dp"
-<<<<<<< HEAD
+
                 android:text="High Pass"
                 android:id="@+id/highpassButton"
                 android:layout_weight=".2"
                 android:layout_marginLeft="40dp"
                 android:textOff="High Pass"
                 android:textOn="High Pass"
-                android:typeface="sans" />
-=======
-                android:textOff="High Pass"
-                android:textOn="High Pass"
+                android:typeface="sans"
                 android:background="@drawable/selector"
-                android:id="@+id/highpassButton"
-                android:layout_marginLeft="40dp"
                 android:textSize="25dp" />
->>>>>>> PaulUI
+
 
             <ToggleButton
                 android:layout_width="112dp"
@@ -243,20 +226,15 @@
                 android:background="@drawable/selector"
                 android:id="@+id/reverseButton"
                 android:layout_marginLeft="40dp"
-<<<<<<< HEAD
-                android:textOn="Reverse"
-                android:textOff="Reverse"
-                android:typeface="sans" />
-=======
+                android:typeface="sans"
                 android:textSize="25dp" />
->>>>>>> PaulUI
+
 
             <ToggleButton
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:textOff="Reverb"
                 android:textOn="Reverb"
-<<<<<<< HEAD
                 android:singleLine="false"
                 android:typeface="sans"
                 android:visibility="visible"
@@ -265,15 +243,13 @@
                 android:layout_marginBottom="0dp"
                 android:clickable="true"
                 android:enabled="true"
-                android:textStyle="normal"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="40dp" />
-=======
+                android:layout_marginLeft="40dp"
                 android:background="@drawable/selector"
                 android:id="@+id/ReverbButton"
                 android:layout_marginLeft="40dp"
                 android:textSize="25dp" />
->>>>>>> PaulUI
+
 
             <Button
                 android:layout_width="112dp"

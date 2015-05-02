@@ -63,7 +63,7 @@
         important pieces of data from the signal.
     </string>
 
-<<<<<<< HEAD
+
     <string name="halve_sample_text">Halve Sample</string>
 
     <string name="halve_sample_title">Halve Sample</string>
@@ -71,7 +71,7 @@
     <string name="double_sample_text">Double Sample</string>
 
     <string name="double_sample_title">Double Sample</string>
-=======
+
     <!-- Double Samples -->
     <string name="double_effect_name">Double Samples</string>
     <string name="double_effect_desc">stretches recording</string>
@@ -97,5 +97,5 @@ leaders to benefit society.\n\nPlease visit http://www.engg.ksu.edu\nLike us on
         granted: 531\nTenured, tenure-track faculty: 123\nEndowment: $147M</string>
 
     <string name="title_activity_display_tutorial">DisplayTutorial</string>
->>>>>>> PaulUI
+
 </resources>
