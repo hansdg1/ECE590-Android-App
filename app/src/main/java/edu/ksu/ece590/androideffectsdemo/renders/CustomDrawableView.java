@@ -2,6 +2,7 @@ package edu.ksu.ece590.androideffectsdemo.renders;
 
 import android.content.Context;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -9,6 +10,7 @@ import android.graphics.Paint;
 
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.AudioTrack;
 import android.util.AttributeSet;
@@ -22,18 +24,19 @@ import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 
 /**
  * Created by el on 4/24/2015.
+ * NOTE: each renderable type should be it's own separate class.
+ * i.e WaveFormRenderer, BarGraphRenderer...
  */
 public class CustomDrawableView extends View {
 
     public enum RenderState
     {
 
-        PROGRESS_BAR,
-        AMPLITUDE_PLOT
+        BITMAP_RENDER
 
     }
 
-    RenderState renderState = RenderState.AMPLITUDE_PLOT;
+    RenderState renderState = RenderState.BITMAP_RENDER;
 
     int framesPerSecond = 60;
     long startTime;
@@ -45,7 +48,8 @@ public class CustomDrawableView extends View {
 
     Matrix matrix = new Matrix();
     Paint paint = new Paint();
-
+    Paint bluePaint = new Paint();
+    Paint black= new Paint();
     int previousState;
     float timePosition;
 
@@ -55,6 +59,7 @@ public class CustomDrawableView extends View {
     int samplesPerDraw = 200;
 
 
+    Bitmap imageBuffer = null;
 
 
     Stack<PointF> drawableStack = new Stack<PointF>();
@@ -73,22 +78,23 @@ public class CustomDrawableView extends View {
     public void Setup() {
 
         paint.setColor(Color.GREEN);
-
+        bluePaint.setColor(Color.BLUE);
+        black.setColor(Color.BLACK);
         this.startTime = System.currentTimeMillis();
         this.postInvalidate();
      }
 
 
     protected void onDraw(Canvas canvas) {
-        // Calculate points for line
+
 
         long elapsedTime = System.currentTimeMillis() - startTime;
 
-
-
-
-
-
+        if(renderState == RenderState.BITMAP_RENDER) {
+            if(imageBuffer != null){
+                canvas.drawBitmap(imageBuffer,0,0,paint);
+            }
+        }
 
         if(audioTrack != null){
 
@@ -96,6 +102,7 @@ public class CustomDrawableView extends View {
                 int i = 0;
                 i++;
             }
+
             if(audioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING)
             {
                 previousState = AudioTrack.PLAYSTATE_PLAYING;
@@ -103,74 +110,24 @@ public class CustomDrawableView extends View {
                 timePosition = (float)audioTrack.getPlaybackHeadPosition() / (float)audioTrack.getSampleRate() * 1000;
 
 
-
-
-                if(renderState == RenderState.PROGRESS_BAR)
-                {
+                if(renderState == RenderState.BITMAP_RENDER) {
 
                     float xPos = (timePosition / totalTimeMs) * (float)getWidth();
 
-
-                  //  canvas.drawLine(0, getHeight() / 2, xPos  , getHeight() / 2, paint);
-                    canvas.drawRect(0, getHeight() / 2 - 25, xPos, getHeight() / 2 + 25, paint);
+                   // canvas.drawBitmap(imageBuffer,0,0,paint);
+                    canvas.drawLine(xPos, 0, xPos  , getHeight(), bluePaint);
                 }
 
-                if(renderState == RenderState.AMPLITUDE_PLOT){
-
-                    float xPos = (timePosition / totalTimeMs) * (float)getWidth();
-
-
-                    //max height
-                    int maxHeight = getHeight();
-                    int dc = maxHeight / 2;
-
-
-                    int maxData = 32767;
-
-                    int elapsedSamples = audioTrack.getPlaybackHeadPosition() - samplesSinceLastDraw;
-
-
-
-
-                    int data = soundData.GetValueAtIndex(audioTrack.getPlaybackHeadPosition());
-
-                    float normalized = (float)data / (float)maxData;
-
-
-                    if(elapsedSamples >= samplesPerDraw)
-                    {
-                        samplesSinceLastDraw = audioTrack.getPlaybackHeadPosition();
-                       drawableStack.push(new PointF(xPos, normalized));
-                    }
-
-                    PointF previous = new PointF(0,0);
-                    int index = 0;
-                    for(PointF obj : drawableStack)
-                    {
-                        if(index > 0)
-                        {
-                            canvas.drawLine(previous.x,getHeight() - dc - previous.y * getHeight(),obj.x,getHeight() - dc - obj.y*getHeight(), paint);
-
-                        }
-                        previous = obj;
-                    index++;
-                    }
-
-
-                }
-
-
-
-            }else
+            }
+            else
             {
-                //canvas.drawLine(getWidth()/ 2, 0, getWidth() / 2, getHeight(), paint);
+
             }
 
 
 
 
 
-        }else {
 
         }
 
@@ -178,6 +135,76 @@ public class CustomDrawableView extends View {
 
         this.postInvalidateDelayed( 1000 / framesPerSecond);
 
+    }
+
+    public void clearImageBuffer()
+    {
+        imageBuffer = null;
+        audioTrack = null;
+        this.postInvalidate();
+    }
+
+    public void DrawImageBuffer(SoundPCM soundData)
+    {
+        imageBuffer = Bitmap.createBitmap(this.getWidth(), this.getHeight(),Bitmap.Config.ARGB_8888);
+
+        Canvas c = new Canvas(imageBuffer);
+
+        float xScale =(float) soundData.NumberOfSamples() /(float)imageBuffer.getWidth() ;
+        //float xScale =(float)imageBuffer.getWidth() / (float) soundData.NumberOfSamples() ;
+        float yScale =  (float) 32767/(float)imageBuffer.getHeight(); //java shorts are -32,768 to 32,767
+
+
+
+        float dc = getHeight() / 2;
+
+        //lets average out the difference
+        float ySum = 0;
+        float x = 0;
+        float xPos = 0;
+
+        float previousX = 0;
+        float previousY = dc;
+
+        float debugYMax = 0;
+        float width = getWidth();
+
+
+
+
+
+        for(int i = 0; i < soundData.NumberOfSamples(); i++)
+        {
+
+            if(x <= xScale)
+            {
+                ySum += soundData.GetValueAtIndex(i);
+                x++;
+            }else
+            {
+                ySum = (float)ySum / (float)x; //average .
+
+                //float normalized = (float)ySum / (float)maxData ;
+                ySum = ySum / yScale;
+
+                // c.drawPoint(xPos, getHeight() - dc - ySum,paint);
+                c.drawLine(previousX, previousY,xPos, getHeight()-dc-ySum, paint);
+                previousX = xPos;
+                previousY = getHeight() - dc - ySum;
+
+                if(previousY > debugYMax) debugYMax = previousY;
+
+
+                x = 0;
+                ySum = 0;
+                xPos++;
+
+
+            }
+
+        }
+
+        this.postInvalidate();
     }
 
     public void update(AudioTrack audioTrack, SoundPCM soundData)
@@ -191,6 +218,19 @@ public class CustomDrawableView extends View {
 
         drawableStack.clear();
         samplesSinceLastDraw = 0;
+
+
+
+
+        //Draw to Bitmap
+        DrawImageBuffer(soundData);
+
+
+
+
+        float test = 0;
+
+
 
     }
 }

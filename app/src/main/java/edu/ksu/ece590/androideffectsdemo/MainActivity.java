@@ -191,6 +191,8 @@ public class MainActivity extends ActionBarActivity {
                     HighPassButton.setChecked(false);
                     ReverseButton.setChecked(false);
                     ReverbButton.setChecked(false);
+                    customDrawableView.clearImageBuffer();
+
 
                     Thread recordThread = new Thread(new Runnable(){
 
@@ -222,6 +224,7 @@ public class MainActivity extends ActionBarActivity {
         LowPassButton.setOnClickListener(LowPassClick);
         HighPassButton.setOnClickListener(HighPassClick);
         ReverseButton.setOnClickListener(ReverseClick);
+
 
 
     }
@@ -265,15 +268,51 @@ public class MainActivity extends ActionBarActivity {
 
             audioRecord.startRecording();
 
+            boolean nonZero = false;
             while(recording){
                 int numberOfShort = audioRecord.read(audioData, 0, minBufferSize);
+
                 for(int i = 0; i < numberOfShort; i++){
-                    dataOutputStream.writeShort(audioData[i]);
+                    if(audioData[i] <= 500 && audioData[i] >= -500 && !nonZero) continue; //try to remove some white space
+                    else {
+                        nonZero = true;
+                        dataOutputStream.writeShort(audioData[i]);
+                    }
+
+
+
                 }
             }
 
             audioRecord.stop();
             dataOutputStream.close();
+
+
+            //load the data again so we can instantly draw it
+
+            int shortSizeInBytes = Short.SIZE / Byte.SIZE;
+            int bufferSizeInBytes = (int) (file.length() / shortSizeInBytes);
+
+            audioData = new short[bufferSizeInBytes];
+
+            InputStream inputStream = new FileInputStream(file);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+            DataInputStream dataInputStream = new DataInputStream(bufferedInputStream);
+
+            int i = 0;
+            while (dataInputStream.available() > 0) {
+                audioData[i] += dataInputStream.readShort();
+
+                i++;
+            }
+
+            dataInputStream.close();
+
+            //Just something to test with. This should all be refactored
+            SoundPCM sound = new SoundPCM(audioData, sampleFreq);
+
+
+            customDrawableView.DrawImageBuffer(sound);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -331,10 +370,7 @@ public class MainActivity extends ActionBarActivity {
 
                 }
 
-                if (ReverbButton.isChecked()) {
-                    //add the effects
-                    eController.AddEffect(new ReverbEffect(0.25f, 250, 44100));
-                }
+
                 if (LowPassButton.isChecked()) {
                     eController.AddEffect((new LowPassEffect(100.0f, sound.NumberOfSamples() / sound.SampleRate())));
                 }
@@ -345,7 +381,10 @@ public class MainActivity extends ActionBarActivity {
 
                     eController.AddEffect(new ReverseEffect());
                 }
-
+                if (ReverbButton.isChecked()) {
+                    //add the effects
+                    eController.AddEffect(new ReverbEffect(0.25f, 250, 44100));
+                }
 
                 sound = eController.CalculateEffects(sound);
 
