@@ -1,10 +1,30 @@
 <resources>
-    <string name="app_name">Test123</string>
-
+    <string name="app_name">Audio Effects Express©</string>
     <string name="hello_world">Hello world!</string>
+
     <string name="action_settings">Settings</string>
+    <string name="reverb_effect_name">Reverb</string>
+    <string name="reverb_effect_desc">An audio effect that mimics reverberations (echos)</string>
+    <string name="lowpass_effect_name">Lowpass Filter</string>
+    <string name="lowpass_effect_desc">An audio effect that...</string>
+    <string name="highpass_effect_name">Highpass Filter</string>
+    <string name="highpass_effect_desc">An audio effect that...</string>
+    <string name="reverse_effect_name">Reverse</string>
+    <string name="reverse_effect_desc">An audio effect that...</string>
+    <string name="recordBtnText">Record</string>
+    <string name="playBtnText">Play</string>
+    
+    <string name="lorum_ipsum"> test</string>
 
-    <string name="lorum_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum efficitur nisi vitae massa tristique, a consequat est consequat. Nullam maximus quam et ipsum laoreet pharetra. In molestie vitae arcu posuere pharetra. Nullam eu mattis urna. Mauris vestibulum scelerisque condimentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum fringilla augue nunc, ut lobortis nulla feugiat nec. Mauris ac ornare neque. Curabitur feugiat orci id orci cursus, at interdum diam laoreet. Integer sollicitudin, risus quis vestibulum tincidunt, mi diam gravida nulla, euismod vestibulum lorem lacus ac tortor. Fusce semper feugiat libero eu tristique. Ut scelerisque purus dolor. Ut vulputate leo vitae interdum dignissim. Aliquam erat volutpat. Pellentesque odio metus, placerat in mauris sit amet, elementum feugiat turpis.
+    <string name="reverb_text">Reverb works!</string>
 
-Curabitur et nisi scelerisque, dapibus massa sed, venenatis ex. Nullam luctus at elit at pellentesque. Pellentesque vulputate odio nec vehicula dignissim. Curabitur sit amet arcu justo. In semper mauris sit amet luctus egestas. Aenean in sapien facilisis, tristique turpis et, gravida elit. Morbi placerat dignissim urna, non ullamcorper tortor auctor sit amet. Integer id aliquet ligula. Maecenas tincidunt orci at nisl pharetra convallis. Pellentesque pulvinar leo id posuere porttitor. Aenean tincidunt, ligula eget rutrum faucibus, orci odio dapibus turpis, non finibus metus odio non nibh. Aliquam aliquam molestie justo sit amet ullamcorper. Pellentesque ut ex id lectus mollis malesuada. Vestibulum consequat neque tortor, in aliquet mi tempus mattis.</string>
+    <string name="reverb_title">Reverb</string>
+
+    <string name="autotune_text">Autotune works!</string>
+
+    <string name="autotune_title">Auto-Tune</string>
+
+    <string name="pitch_text">Pitch works!</string>
+
+    <string name="pitch_title">Pitch</string>
 </resources>

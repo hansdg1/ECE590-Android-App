@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Pitch"
-            android:id="@+id/textView2"
+            android:id="@+id/TitleContent"
             android:layout_column="0"
             android:layout_span="2"
             android:layout_marginLeft="40dp"
@@ -69,7 +69,7 @@
             android:layout_height="500dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/lorum_ipsum"
-            android:id="@+id/textView"
+            android:id="@+id/MainContent"
             android:layout_column="0"
             android:layout_span="3"
             android:layout_marginTop="0dp"
@@ -95,13 +95,12 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp">
 
-        <ToggleButton
+        <Button
             android:layout_width="150dp"
             android:layout_height="100dp"
-            android:text="New ToggleButton"
-            android:id="@+id/toggleButton3"
-            android:textOff="Record"
-            android:textOn="Record"
+            android:text="Record"
+            android:id="@+id/RecordButton"
+
             android:textSize="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="22dp"
@@ -113,13 +112,14 @@
             android:layout_gravity="center_vertical"
             android:layout_column="0"
             android:layout_span="1"
-            android:layout_weight=".2" />
+            android:layout_weight=".2"
+            android:checked="false" />
 
         <ToggleButton
             android:layout_width="250dp"
             android:layout_height="100dp"
             android:text="reverb-button"
-            android:id="@+id/button2"
+            android:id="@+id/ReverbButton"
             android:textOff="Reverb"
             android:textOn="Reverb (Active)"
             android:singleLine="false"
@@ -140,10 +140,10 @@
             android:layout_width="250dp"
             android:layout_height="100dp"
             android:text="auto-tune-button"
-            android:id="@+id/toggleButton"
+            android:id="@+id/AutotuneButton"
             android:textOff="Auto-Tune"
             android:textOn="Auto-Tune (Active)"
-            android:checked="true"
+            android:checked="false"
             android:textSize="30dp"
             android:layout_marginLeft="22dp"
             android:layout_marginRight="22dp"
@@ -159,8 +159,8 @@
         <ToggleButton
             android:layout_width="250dp"
             android:layout_height="100dp"
-            android:text="New ToggleButton"
-            android:id="@+id/toggleButton2"
+            android:text="pitch-button"
+            android:id="@+id/PitchButton"
             android:textOff="Pitch"
             android:textOn="Pitch (Active)"
             android:checked="false"
@@ -178,7 +178,7 @@
             android:layout_width="150dp"
             android:layout_height="100dp"
             android:text="Play"
-            android:id="@+id/button"
+            android:id="@+id/PlayButton"
             android:textSize="30dp"
             android:layout_marginLeft="22dp"
             android:layout_marginRight="22dp"
@@ -193,5 +193,3 @@
 
 
 </TableLayout>
-
-
