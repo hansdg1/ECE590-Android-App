@@ -1,5 +1,7 @@
 package edu.ksu.ece590.androideffectsdemo;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
@@ -46,9 +48,12 @@ public class MainActivity extends ActionBarActivity {
     TextView MainContent;
     TextView TitleContent;
     ToggleButton ReverbButton;
+<<<<<<< HEAD
     ToggleButton DoubleSampleButton;
     ToggleButton HalveSampleButton;
 
+=======
+>>>>>>> PaulUI
     ToggleButton LowPassButton;
     ToggleButton HighPassButton;
     ToggleButton ReverseButton;
@@ -69,16 +74,15 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
-
         // find View-elements
         TitleContent = (TextView) findViewById(R.id.TitleContent);
         MainContent = (TextView) findViewById(R.id.MainContent);
         ReverbButton = (ToggleButton) findViewById(R.id.ReverbButton);
+<<<<<<< HEAD
         DoubleSampleButton = (ToggleButton) findViewById(R.id.DoubleSampleButton);
         HalveSampleButton = (ToggleButton) findViewById(R.id.HalveSampleButton);
+=======
+>>>>>>> PaulUI
 
         LowPassButton = (ToggleButton) findViewById(R.id.lowpassFilterButton);
         HighPassButton = (ToggleButton) findViewById(R.id.highpassButton);
@@ -95,6 +99,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
+<<<<<<< HEAD
                 MainContent.setText(R.string.reverb_text);
                 TitleContent.setText(R.string.reverb_title);
             }
@@ -115,6 +120,10 @@ public class MainActivity extends ActionBarActivity {
                 // change text of the TextView (MainContent)
                 MainContent.setText(R.string.halve_sample_text);
                 TitleContent.setText(R.string.halve_sample_title);
+=======
+                MainContent.setText(R.string.reverb_effect_desc);
+                TitleContent.setText(R.string.reverb_effect_name);
+>>>>>>> PaulUI
             }
         };
 
@@ -170,6 +179,7 @@ public class MainActivity extends ActionBarActivity {
                 //if the button was pressed and we were recording, we want to stop
                 if(recording){
                     RecordButton.setText("Rec");
+                    RecordButton.setBackgroundColor(Color.LTGRAY);
                     PlayButton.setEnabled(true);
                     PlayButton.setClickable(true);
 
@@ -180,6 +190,7 @@ public class MainActivity extends ActionBarActivity {
                 }else {
                     //we were not recording, and we want to start
                     RecordButton.setText("Stop");
+                    RecordButton.setBackgroundColor(Color.RED);
                     PlayButton.setEnabled(false);
                     PlayButton.setClickable(false);
 
@@ -216,8 +227,11 @@ public class MainActivity extends ActionBarActivity {
 
         // assign click listener to the OK button (btnOK)
         ReverbButton.setOnClickListener(ReverbClick);
+<<<<<<< HEAD
         HalveSampleButton.setOnClickListener(HalveSampleClick);
         DoubleSampleButton.setOnClickListener(DoubleSampleClick);
+=======
+>>>>>>> PaulUI
         PlayButton.setOnClickListener(PlayClick);
         RecordButton.setOnClickListener(RecordClick);
 
@@ -424,10 +438,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
-
-
-
     private void playRecord(){
 
 
@@ -436,6 +446,11 @@ public class MainActivity extends ActionBarActivity {
 
 
 
+    }
+
+    public void openTutorial(View view) {
+        Intent intent = new Intent(this, DisplayTutorial.class);
+        startActivity(intent);
     }
 
 }
