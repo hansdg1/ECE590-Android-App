@@ -31,9 +31,7 @@ public class CustomDrawableView extends View {
 
     public enum RenderState
     {
-
         BITMAP_RENDER
-
     }
 
     RenderState renderState = RenderState.BITMAP_RENDER;
@@ -46,21 +44,15 @@ public class CustomDrawableView extends View {
     AudioTrack audioTrack;
     SoundPCM soundData;
 
-    Matrix matrix = new Matrix();
     Paint paint = new Paint();
     Paint bluePaint = new Paint();
-    Paint black= new Paint();
+    Paint black = new Paint();
     int previousState;
     float timePosition;
 
-
     int samplesSinceLastDraw = 0;
 
-    int samplesPerDraw = 200;
-
-
     Bitmap imageBuffer = null;
-
 
     Stack<PointF> drawableStack = new Stack<PointF>();
 
@@ -74,7 +66,6 @@ public class CustomDrawableView extends View {
         Setup();
     }
 
-
     public void Setup() {
 
         paint.setColor(Color.GREEN);
@@ -84,9 +75,7 @@ public class CustomDrawableView extends View {
         this.postInvalidate();
      }
 
-
     protected void onDraw(Canvas canvas) {
-
 
         long elapsedTime = System.currentTimeMillis() - startTime;
 
@@ -96,39 +85,29 @@ public class CustomDrawableView extends View {
             }
         }
 
-        if(audioTrack != null){
+        if(audioTrack != null) {
 
+            /*
             if(previousState == AudioTrack.PLAYSTATE_PLAYING && audioTrack.getPlayState() == AudioTrack.PLAYSTATE_STOPPED){
                 int i = 0;
                 i++;
             }
+            */
 
-            if(audioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING)
-            {
+            if (audioTrack.getPlayState() == AudioTrack.PLAYSTATE_PLAYING) {
                 previousState = AudioTrack.PLAYSTATE_PLAYING;
 
-                timePosition = (float)audioTrack.getPlaybackHeadPosition() / (float)audioTrack.getSampleRate() * 1000;
+                timePosition = (float) audioTrack.getPlaybackHeadPosition() / (float) audioTrack.getSampleRate() * 1000;
 
 
-                if(renderState == RenderState.BITMAP_RENDER) {
+                if (renderState == RenderState.BITMAP_RENDER) {
 
-                    float xPos = (timePosition / totalTimeMs) * (float)getWidth();
+                    float xPos = (timePosition / totalTimeMs) * (float) getWidth();
 
-                   // canvas.drawBitmap(imageBuffer,0,0,paint);
-                    canvas.drawLine(xPos, 0, xPos  , getHeight(), bluePaint);
+                    // canvas.drawBitmap(imageBuffer,0,0,paint);
+                    canvas.drawLine(xPos, 0, xPos, getHeight(), bluePaint);
                 }
-
             }
-            else
-            {
-
-            }
-
-
-
-
-
-
         }
 
         this.startTime = elapsedTime;
@@ -154,7 +133,7 @@ public class CustomDrawableView extends View {
         //float xScale =(float)imageBuffer.getWidth() / (float) soundData.NumberOfSamples() ;
         float yScale =  (float) 32767/(float)imageBuffer.getHeight(); //java shorts are -32,768 to 32,767
 
-
+        xScale = (float)Math.ceil((double)xScale);
 
         float dc = getHeight() / 2;
 
@@ -167,11 +146,7 @@ public class CustomDrawableView extends View {
         float previousY = dc;
 
         float debugYMax = 0;
-        float width = getWidth();
-
-
-
-
+        float width = getWidth(); //for debugging
 
         for(int i = 0; i < soundData.NumberOfSamples(); i++)
         {
@@ -180,9 +155,11 @@ public class CustomDrawableView extends View {
             {
                 ySum += soundData.GetValueAtIndex(i);
                 x++;
-            }else
+            }
+
+            else
             {
-                ySum = (float)ySum / (float)x; //average .
+                ySum = ySum / x; //average .
 
                 //float normalized = (float)ySum / (float)maxData ;
                 ySum = ySum / yScale;
@@ -194,14 +171,11 @@ public class CustomDrawableView extends View {
 
                 if(previousY > debugYMax) debugYMax = previousY;
 
-
                 x = 0;
                 ySum = 0;
                 xPos++;
 
-
             }
-
         }
 
         this.postInvalidate();
@@ -212,25 +186,17 @@ public class CustomDrawableView extends View {
         this.audioTrack = audioTrack;
         this.soundData = soundData;
 
-         totalTimeMs = (float)soundData.NumberOfSamples()/ (float)soundData.SampleRate() * 1000;
+        totalTimeMs = (float)soundData.NumberOfSamples()/ (float)soundData.SampleRate() * 1000;
 
         previousState = AudioTrack.PLAYSTATE_STOPPED;
 
         drawableStack.clear();
         samplesSinceLastDraw = 0;
 
-
-
-
         //Draw to Bitmap
         DrawImageBuffer(soundData);
 
-
-
-
         float test = 0;
-
-
 
     }
 }

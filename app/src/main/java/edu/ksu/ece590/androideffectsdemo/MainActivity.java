@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+//import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.io.BufferedInputStream;
@@ -70,6 +70,7 @@ public class MainActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         // find View-elements
         TitleContent = (TextView) findViewById(R.id.TitleContent);
@@ -175,10 +176,9 @@ public class MainActivity extends ActionBarActivity {
                     PlayButton.setClickable(true);
 
                     recording = false;
+                }
 
-
-
-                }else {
+                else {
                     //we were not recording, and we want to start
                     RecordButton.setText("Stop");
                     RecordButton.setBackgroundColor(Color.RED);
@@ -195,6 +195,9 @@ public class MainActivity extends ActionBarActivity {
                     ReverbButton.setChecked(false);
                     customDrawableView.clearImageBuffer();
 
+                    //reset main text for new record
+                    TitleContent.setText(R.string.start_title);
+                    MainContent.setText(R.string.start_text);
 
                     Thread recordThread = new Thread(new Runnable(){
 
@@ -238,6 +241,8 @@ public class MainActivity extends ActionBarActivity {
 
         File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
 
+        /*
+        //Debugging popup thing
         final String promptStartRecord =
                 "startRecord()\n"
                         + file.getAbsolutePath() + "\n";
@@ -249,7 +254,7 @@ public class MainActivity extends ActionBarActivity {
                 Toast.makeText(MainActivity.this,
                         promptStartRecord,
                         Toast.LENGTH_LONG).show();
-            }});
+            }});*/
 
         try {
             file.createNewFile();
@@ -392,9 +397,6 @@ public class MainActivity extends ActionBarActivity {
 
                 sound = eController.CalculateEffects(sound);
 
-
-
-
                 int minSize = AudioTrack.getMinBufferSize(sampleFreq, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT);
 
                 AudioTrack audioTrack = new AudioTrack(
@@ -411,7 +413,7 @@ public class MainActivity extends ActionBarActivity {
                 audioTrack.play();
 
 
-                audioTrack.write(sound.GetBuffer(), 0,sound.GetBuffer().length);
+                audioTrack.write(sound.GetBuffer(), 0, sound.GetBuffer().length);
 
                 audioTrack.stop();
                 audioTrack.release();
