@@ -10,7 +10,7 @@
 
     <!-- Reverb -->
     <string name="reverb_effect_name">Reverb</string>
-    <string name="reverb_effect_desc">An audio effect that mimics reverberations (echos)</string>
+    <string name="reverb_effect_desc">Add an echo</string>
     <string name="reverb_tutorial">
         Reverb or Echo functions are used to simulate the effect of
         reverberation in a large hall or cavern. Several delayed signals
@@ -22,7 +22,7 @@
 
     <!-- Lowpass -->
     <string name="lowpass_effect_name">Lowpass Filter</string>
-    <string name="lowpass_effect_desc">An audio effect that...</string>
+    <string name="lowpass_effect_desc">Remove high pitch noise</string>
     <string name="lowpass_tutorial">
         The low pass filter on this application only passes data
     from the signal under a certain range. The range is
@@ -33,7 +33,7 @@
 
     <!-- Highpass -->
     <string name="highpass_effect_name">Highpass Filter</string>
-    <string name="highpass_effect_desc">An audio effect that...</string>
+    <string name="highpass_effect_desc">Remove low pitch noise</string>
     <string name="highpass_tutorial">The high pass filter on this application only passes data
         from the signal over a certain range. The range is
         determined by the signal so this is not a set value.
@@ -43,7 +43,7 @@
 
     <!-- Reverse -->
     <string name="reverse_effect_name">Reverse</string>
-    <string name="reverse_effect_desc">An audio effect that...</string>
+    <string name="reverse_effect_desc">Reverse the recording</string>
     <string name="reverse_tutorial">The reverse function in this application takes the last sample
         and makes it to the first and takes the first sample and
         makes it the last. It does this for all the data points in the
@@ -54,7 +54,7 @@
 
     <!-- Halve Samples -->
     <string name="halve_effect_name">Halve Samples</string>
-    <string name="halve_effect_desc">An audio effect that...</string>
+    <string name="halve_effect_desc">loss in quality</string>
     <string name="halve_tutorial">Also referred to as Decimation, this is the process of
         reducing the sampling rate of a signal. Decimation reduces
         the data rate of the size of the data, in this application\'s
@@ -65,7 +65,7 @@
 
     <!-- Double Samples -->
     <string name="double_effect_name">Double Samples</string>
-    <string name="double_effect_desc">An audio effect that...</string>
+    <string name="double_effect_desc">stretches recording</string>
     <string name="double_tutorial">Also referred to as <i>Interpolation</i>, this is the process of
         creating new data points within the range of the known
         data points. This can be done by converting a sampled
