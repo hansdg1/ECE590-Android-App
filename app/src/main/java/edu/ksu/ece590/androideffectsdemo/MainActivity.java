@@ -94,8 +94,8 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 // change text of the TextView (MainContent)
 
-                MainContent.setText(R.string.reverb_text);
-                TitleContent.setText(R.string.reverb_title);
+                MainContent.setText(R.string.reverb_effect_desc);
+                TitleContent.setText(R.string.reverb_effect_name);
             }
         };
 
@@ -379,7 +379,7 @@ public class MainActivity extends ActionBarActivity {
                     eController.AddEffect((new LowPassEffect(100.0f, sound.NumberOfSamples() / sound.SampleRate())));
                 }
                 if (HighPassButton.isChecked()) {
-                    eController.AddEffect((new HighPassEffect(100.0f, sound.NumberOfSamples() / sound.SampleRate())));
+                    eController.AddEffect((new HighPassEffect(.5f, sound.NumberOfSamples() / sound.SampleRate())));
                 }
                 if (ReverseButton.isChecked()) {
 
