@@ -1,4 +1,5 @@
 package edu.ksu.ece590.androideffectsdemo.effects;
+
 import android.content.Context;
 
 import edu.ksu.ece590.androideffectsdemo.R;
@@ -10,8 +11,7 @@ import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 public class DoubleSampleEffect implements IEffect {
 
 
-    public DoubleSampleEffect()
-    {
+    public DoubleSampleEffect() {
 
     }
 
@@ -24,18 +24,16 @@ public class DoubleSampleEffect implements IEffect {
         short[] buffer = new short[newLength];
 
         int index = 0;
-        for(int i = 0; i < oldLength; i++ )
-        {
+        for (int i = 0; i < oldLength; i++) {
 
-             short value = input.GetValueAtIndex(i);
-             buffer[index] = value;
+            short value = input.GetValueAtIndex(i);
+            buffer[index] = value;
             index++;
 
-             if( index + 1 < buffer.length)
-             {
-                 buffer[index + 1] = value;
-                 index++;
-             }
+            if (index + 1 < buffer.length) {
+                buffer[index + 1] = value;
+                index++;
+            }
 
         }
 

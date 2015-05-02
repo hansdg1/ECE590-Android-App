@@ -24,12 +24,11 @@ public class EffectsController {
 
     }
 
-    public void AddEffect(IEffect effect)
-    {
+    public void AddEffect(IEffect effect) {
         Boolean found = false;
 
         //find the first empty slot to put it in
-        for(Integer key: EffectsMap.keySet() ) {
+        for (Integer key : EffectsMap.keySet()) {
             if (EffectsMap.get(key) == null) {
                 EffectsMap.remove(key);
                 EffectsMap.put(key, effect);
@@ -39,22 +38,20 @@ public class EffectsController {
         }
 
         //if nothing was found. Throw it in spot 1 because it's in the center
-        if(!found){
+        if (!found) {
             EffectsMap.remove(1);
             EffectsMap.put(1, effect);
         }
     }
 
     //If we decide to drag to location instead of simply swiping down
-    public void SetEffect(Integer key, IEffect effect)
-    {
+    public void SetEffect(Integer key, IEffect effect) {
         EffectsMap.remove(key);
         EffectsMap.put(key, effect);
     }
 
     //Swap some effects
-    public void SwapEffects(Integer index1, Integer index2 )
-    {
+    public void SwapEffects(Integer index1, Integer index2) {
         IEffect temp = EffectsMap.remove(index1);
         EffectsMap.put(index1, EffectsMap.remove(index2));
         EffectsMap.put(index2, temp);
@@ -89,15 +86,14 @@ public class EffectsController {
     */
 
     //loop through and calculate the effects
-    public SoundPCM CalculateEffects(SoundPCM input)
-    {
+    public SoundPCM CalculateEffects(SoundPCM input) {
 
         SoundPCM sound = new SoundPCM(input);
 
         //loop through and calculate
-        for(Integer key: EffectsMap.keySet() ) {
+        for (Integer key : EffectsMap.keySet()) {
             if (EffectsMap.get(key) == null) {
-               continue; // it's null, continue to next iteration
+                continue; // it's null, continue to next iteration
             }
 
             IEffect effect = EffectsMap.get(key);

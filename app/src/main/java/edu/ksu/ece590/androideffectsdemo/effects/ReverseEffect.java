@@ -15,8 +15,7 @@ public class ReverseEffect implements IEffect {
     public SoundPCM Calculate(SoundPCM input) {
         short[] buffer = new short[input.NumberOfSamples()];
 
-        for(int i = 0; i < input.NumberOfSamples(); i++)
-        {
+        for (int i = 0; i < input.NumberOfSamples(); i++) {
             buffer[input.NumberOfSamples() - i - 1] = input.GetValueAtIndex(i);
         }
 
