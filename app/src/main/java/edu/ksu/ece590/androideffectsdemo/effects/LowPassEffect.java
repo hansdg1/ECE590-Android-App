@@ -1,8 +1,5 @@
 package edu.ksu.ece590.androideffectsdemo.effects;
 
-import android.content.Context;
-
-import edu.ksu.ece590.androideffectsdemo.R;
 import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 
 /**
@@ -25,7 +22,8 @@ public class LowPassEffect implements IEffect {
 
         float alpha = dt / (rc + dt);
 
-        short[] buffer = new short[input.NumberOfSamples()];
+        short[] buffer;
+        buffer = new short[input.NumberOfSamples()];
 
         buffer[0] = input.GetValueAtIndex(0);
         for (int i = 1; i < input.NumberOfSamples(); i++) {

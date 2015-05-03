@@ -8,13 +8,12 @@ import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-//import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.io.BufferedInputStream;
@@ -38,6 +37,8 @@ import edu.ksu.ece590.androideffectsdemo.effects.ReverbEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.ReverseEffect;
 import edu.ksu.ece590.androideffectsdemo.renders.CustomDrawableView;
 import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
+
+//import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -65,7 +66,9 @@ public class MainActivity extends ActionBarActivity {
     AudioPlayTask audioTask;
 
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,17 +77,17 @@ public class MainActivity extends ActionBarActivity {
 
         // find View-elements
         TitleContent = (TextView) findViewById(R.id.TitleContent);
-        MainContent = (TextView) findViewById(R.id.MainContent);
-        ReverbButton = (ToggleButton) findViewById(R.id.ReverbButton);
-        DoubleSampleButton = (ToggleButton) findViewById(R.id.DoubleSampleButton);
-        HalveSampleButton = (ToggleButton) findViewById(R.id.HalveSampleButton);
+        MainContent = (TextView) findViewById(R.id.text_main_content);
+        ReverbButton = (ToggleButton) findViewById(R.id.button_reverb);
+        DoubleSampleButton = (ToggleButton) findViewById(R.id.button_double_samples);
+        HalveSampleButton = (ToggleButton) findViewById(R.id.button_halve_samples);
 
-        LowPassButton = (ToggleButton) findViewById(R.id.lowpassFilterButton);
-        HighPassButton = (ToggleButton) findViewById(R.id.highpassButton);
-        ReverseButton = (ToggleButton) findViewById(R.id.reverseButton);
+        LowPassButton = (ToggleButton) findViewById(R.id.button_lowpass_filter);
+        HighPassButton = (ToggleButton) findViewById(R.id.button_highpass_filter);
+        ReverseButton = (ToggleButton) findViewById(R.id.button_reverse);
 
-        PlayButton = (Button) findViewById(R.id.PlayButton);
-        RecordButton = (Button) findViewById(R.id.RecordButton);
+        PlayButton = (Button) findViewById(R.id.button_play);
+        RecordButton = (Button) findViewById(R.id.button_record);
 
 
         customDrawableView = (CustomDrawableView) findViewById(R.id.view);
@@ -93,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
         final View.OnClickListener ReverbClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // change text of the TextView (MainContent)
+                // change text of the TextView (text_main_content)
 
                 MainContent.setText(R.string.reverb_effect_desc);
                 TitleContent.setText(R.string.reverb_effect_name);
@@ -103,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
         View.OnClickListener DoubleSampleClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // change text of the TextView (MainContent)
+                // change text of the TextView (text_main_content)
                 MainContent.setText(R.string.double_sample_text);
                 TitleContent.setText(R.string.double_sample_title);
             }
@@ -112,7 +115,7 @@ public class MainActivity extends ActionBarActivity {
         View.OnClickListener HalveSampleClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // change text of the TextView (MainContent)
+                // change text of the TextView (text_main_content)
                 MainContent.setText(R.string.halve_sample_text);
                 TitleContent.setText(R.string.halve_sample_title);
 
@@ -124,7 +127,7 @@ public class MainActivity extends ActionBarActivity {
         View.OnClickListener LowPassClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // change text of the TextView (MainContent)
+                // change text of the TextView (text_main_content)
                 MainContent.setText(R.string.lowpass_effect_desc);
                 TitleContent.setText(R.string.lowpass_effect_name);
             }
@@ -133,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
         View.OnClickListener HighPassClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // change text of the TextView (MainContent)
+                // change text of the TextView (text_main_content)
                 MainContent.setText(R.string.highpass_effect_desc);
                 TitleContent.setText(R.string.highpass_effect_name);
             }
@@ -142,7 +145,7 @@ public class MainActivity extends ActionBarActivity {
         View.OnClickListener ReverseClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // change text of the TextView (MainContent)
+                // change text of the TextView (text_main_content)
                 MainContent.setText(R.string.reverse_effect_desc);
                 TitleContent.setText(R.string.reverse_effect_name);
             }
@@ -157,7 +160,7 @@ public class MainActivity extends ActionBarActivity {
                 RecordButton.setClickable(false);
 
 
-                        playRecord();
+                playRecord();
 
 
                 RecordButton.setEnabled(true);
@@ -169,16 +172,14 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //if the button was pressed and we were recording, we want to stop
-                if(recording){
+                if (recording) {
                     RecordButton.setText("Rec");
                     RecordButton.setBackgroundColor(Color.LTGRAY);
                     PlayButton.setEnabled(true);
                     PlayButton.setClickable(true);
 
                     recording = false;
-                }
-
-                else {
+                } else {
                     //we were not recording, and we want to start
                     RecordButton.setText("Stop");
                     RecordButton.setBackgroundColor(Color.RED);
@@ -199,7 +200,7 @@ public class MainActivity extends ActionBarActivity {
                     TitleContent.setText(R.string.start_title);
                     MainContent.setText(R.string.start_text);
 
-                    Thread recordThread = new Thread(new Runnable(){
+                    Thread recordThread = new Thread(new Runnable() {
 
                         @Override
                         public void run() {
@@ -207,7 +208,6 @@ public class MainActivity extends ActionBarActivity {
                             recording = true;
                             startRecord();
                         }
-
 
 
                     });
@@ -233,11 +233,10 @@ public class MainActivity extends ActionBarActivity {
         ReverseButton.setOnClickListener(ReverseClick);
 
 
-
     }
 
 
-    private void startRecord(){
+    private void startRecord() {
 
         File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
 
@@ -278,16 +277,16 @@ public class MainActivity extends ActionBarActivity {
             audioRecord.startRecording();
 
             boolean nonZero = false;
-            while(recording){
+            while (recording) {
                 int numberOfShort = audioRecord.read(audioData, 0, minBufferSize);
 
-                for(int i = 0; i < numberOfShort; i++){
-                    if(audioData[i] <= 500 && audioData[i] >= -500 && !nonZero) continue; //try to remove some white space
+                for (int i = 0; i < numberOfShort; i++) {
+                    if (audioData[i] <= 500 && audioData[i] >= -500 && !nonZero)
+                        continue; //try to remove some white space
                     else {
                         nonZero = true;
                         dataOutputStream.writeShort(audioData[i]);
                     }
-
 
 
                 }
@@ -330,12 +329,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
-    private class AudioPlayTask extends AsyncTask<Void, Void, Void>
-    {
+    private class AudioPlayTask extends AsyncTask<Void, Void, Void> {
         @Override
-        protected Void doInBackground(Void... params)
-        {
+        protected Void doInBackground(Void... params) {
             try {
 
                 File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
@@ -363,8 +359,7 @@ public class MainActivity extends ActionBarActivity {
 
                 EffectsController eController = new EffectsController();
 
-                if (HalveSampleButton.isChecked())
-                {
+                if (HalveSampleButton.isChecked()) {
                     eController.AddEffect(new HalveSampleEffect());
                     //Halve the sample effect
                 }
@@ -372,8 +367,7 @@ public class MainActivity extends ActionBarActivity {
                 //Leave like this to demonstrate signal loss/degradation.
                 //I.e We lost part of the signal from halving. It cannot be regained by doubling.
 
-                if (DoubleSampleButton.isChecked())
-                {
+                if (DoubleSampleButton.isChecked()) {
                     eController.AddEffect(new DoubleSampleEffect());
                     //Double the sample effect
 
@@ -430,12 +424,11 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void playRecord(){
+    private void playRecord() {
 
 
         audioTask = new AudioPlayTask();
         audioTask.execute();
-
 
 
     }

@@ -28,19 +28,19 @@
                 android:layout_width="500dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Choose a topic:"
+                android:text="@string/tutorial_Title"
                 android:id="@+id/TutorialTitle"
-                android:layout_marginLeft="40dp"
                 android:layout_marginTop="25dp"
                 android:textSize="50sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginLeft="25dp" />
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="708dp"
                 android:layout_height="60dp"
                 android:text="@string/appinfo_effect_name"
                 android:id="@+id/TitleContent"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="25dp" />
 
@@ -75,19 +75,19 @@
                         android:layout_height="100dp"
                         android:id="@+id/BasicsButton"
                         android:layout_column="0"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:textAllCaps="false"
-                        android:text="Application Basics"
+                        android:text="@string/buttontext_tutorial_AppBasics"
                         android:layout_marginRight="75dp"
                         android:layout_gravity="bottom" />
 
                     <Button
                         android:layout_width="200dp"
                         android:layout_height="100dp"
-                        android:text="K-State Engineering"
+                        android:text="@string/buttontext_tutorial_KstateEngg"
                         android:id="@+id/EnggButton"
                         android:layout_column="1"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:textAllCaps="false"
                         android:textStyle="normal" />
                 </TableRow>
@@ -102,21 +102,21 @@
                         android:layout_height="100dp"
                         android:id="@+id/HalveButton"
                         android:layout_column="0"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:textAllCaps="false"
                         android:singleLine="false"
-                        android:text="Halve Samples"
+                        android:text="@string/buttontext_tutorial_halve_samples"
                         android:layout_marginRight="75dp"
                         android:layout_gravity="bottom" />
 
                     <Button
                         android:layout_width="200dp"
                         android:layout_height="100dp"
-                        android:text="Double Samples"
+                        android:text="@string/buttontext_tutorial_double_samples"
                         android:id="@+id/DoubleButton"
                         android:layout_column="1"
-                        android:textSize="24dp"
-                        android:textAllCaps="false"/>
+                        android:textSize="24sp"
+                        android:textAllCaps="false" />
                 </TableRow>
 
                 <TableRow
@@ -129,21 +129,21 @@
                         android:layout_height="100dp"
                         android:id="@+id/LowpassButton"
                         android:layout_column="0"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:textAllCaps="false"
                         android:singleLine="false"
-                        android:text="Low Pass"
+                        android:text="@string/buttontext_tutorial_low_pass"
                         android:layout_marginRight="75dp"
                         android:layout_gravity="bottom" />
 
                     <Button
                         android:layout_width="200dp"
                         android:layout_height="100dp"
-                        android:text="High Pass"
+                        android:text="@string/buttontext_tutorial_high_pass"
                         android:id="@+id/HighpassButton"
                         android:layout_column="1"
-                        android:textSize="24dp"
-                        android:textAllCaps="false"/>
+                        android:textSize="24sp"
+                        android:textAllCaps="false" />
                 </TableRow>
 
                 <TableRow
@@ -156,21 +156,21 @@
                         android:layout_height="100dp"
                         android:id="@+id/ReverseButton"
                         android:layout_column="0"
-                        android:textSize="24dp"
+                        android:textSize="24sp"
                         android:textAllCaps="false"
                         android:singleLine="false"
-                        android:text="Reverse"
+                        android:text="@string/buttontext_tutorial_reverse"
                         android:layout_marginRight="75dp"
                         android:layout_gravity="bottom" />
 
                     <Button
                         android:layout_width="200dp"
                         android:layout_height="100dp"
-                        android:text="Reverb"
-                        android:id="@+id/ReverbButton"
+                        android:text="@string/buttontext_tutorial_reverb"
+                        android:id="@+id/button_reverb"
                         android:layout_column="1"
-                        android:textSize="24dp"
-                        android:textAllCaps="false"/>
+                        android:textSize="24sp"
+                        android:textAllCaps="false" />
                 </TableRow>
 
                 <TableRow
@@ -180,11 +180,11 @@
                     <Button
                         android:layout_width="200dp"
                         android:layout_height="100dp"
-                        android:id="@+id/AppButton"
+                        android:id="@+id/button_back_to_application"
                         android:layout_column="0"
-                        android:textSize="30dp"
+                        android:textSize="30sp"
                         android:singleLine="false"
-                        android:text="Back to Application"
+                        android:text="@string/buttontext_tutorial_back_to_main_app"
                         android:textAllCaps="false"
                         android:layout_gravity="bottom"
                         android:layout_span="2"
@@ -198,13 +198,12 @@
                 android:layout_height="600dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/appinfo_tutorial"
-                android:id="@+id/MainContent"
-                android:layout_column="0"
+                android:id="@+id/text_main_content"
                 android:lineSpacingMultiplier="1.3"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="10dp"
-                android:textSize="28dp" />
+                android:textSize="28sp" />
 
         </LinearLayout>
 

@@ -1,10 +1,6 @@
 package edu.ksu.ece590.androideffectsdemo.effects;
 
-import android.content.Context;
-
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 
@@ -20,7 +16,6 @@ public class EffectsController {
         EffectsMap.put(0, null);
         EffectsMap.put(1, null);
         EffectsMap.put(2, null);
-
 
     }
 

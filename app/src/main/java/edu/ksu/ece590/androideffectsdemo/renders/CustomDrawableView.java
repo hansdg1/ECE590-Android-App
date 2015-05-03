@@ -1,21 +1,14 @@
 package edu.ksu.ece590.androideffectsdemo.renders;
 
 import android.content.Context;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-
-import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.media.AudioTrack;
 import android.util.AttributeSet;
 import android.view.View;
-
 
 import java.util.Stack;
 
@@ -29,8 +22,7 @@ import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
  */
 public class CustomDrawableView extends View {
 
-    public enum RenderState
-    {
+    public enum RenderState {
         BITMAP_RENDER
     }
 
@@ -73,19 +65,19 @@ public class CustomDrawableView extends View {
         black.setColor(Color.BLACK);
         this.startTime = System.currentTimeMillis();
         this.postInvalidate();
-     }
+    }
 
     protected void onDraw(Canvas canvas) {
 
         long elapsedTime = System.currentTimeMillis() - startTime;
 
-        if(renderState == RenderState.BITMAP_RENDER) {
-            if(imageBuffer != null){
-                canvas.drawBitmap(imageBuffer,0,0,paint);
+        if (renderState == RenderState.BITMAP_RENDER) {
+            if (imageBuffer != null) {
+                canvas.drawBitmap(imageBuffer, 0, 0, paint);
             }
         }
 
-        if(audioTrack != null) {
+        if (audioTrack != null) {
 
             /*
             if(previousState == AudioTrack.PLAYSTATE_PLAYING && audioTrack.getPlayState() == AudioTrack.PLAYSTATE_STOPPED){
@@ -112,28 +104,26 @@ public class CustomDrawableView extends View {
 
         this.startTime = elapsedTime;
 
-        this.postInvalidateDelayed( 1000 / framesPerSecond);
+        this.postInvalidateDelayed(1000 / framesPerSecond);
 
     }
 
-    public void clearImageBuffer()
-    {
+    public void clearImageBuffer() {
         imageBuffer = null;
         audioTrack = null;
         this.postInvalidate();
     }
 
-    public void DrawImageBuffer(SoundPCM soundData)
-    {
-        imageBuffer = Bitmap.createBitmap(this.getWidth(), this.getHeight(),Bitmap.Config.ARGB_8888);
+    public void DrawImageBuffer(SoundPCM soundData) {
+        imageBuffer = Bitmap.createBitmap(this.getWidth(), this.getHeight(), Bitmap.Config.ARGB_8888);
 
         Canvas c = new Canvas(imageBuffer);
 
-        float xScale =(float) soundData.NumberOfSamples() /(float)imageBuffer.getWidth() ;
+        float xScale = (float) soundData.NumberOfSamples() / (float) imageBuffer.getWidth();
         //float xScale =(float)imageBuffer.getWidth() / (float) soundData.NumberOfSamples() ;
-        float yScale =  (float) 32767/(float)imageBuffer.getHeight(); //java shorts are -32,768 to 32,767
+        float yScale = (float) 32767 / (float) imageBuffer.getHeight(); //java shorts are -32,768 to 32,767
 
-        xScale = (float)Math.ceil((double)xScale);
+        xScale = (float) Math.ceil((double) xScale);
 
         float dc = getHeight() / 2;
 
@@ -148,28 +138,23 @@ public class CustomDrawableView extends View {
         float debugYMax = 0;
         float width = getWidth(); //for debugging
 
-        for(int i = 0; i < soundData.NumberOfSamples(); i++)
-        {
+        for (int i = 0; i < soundData.NumberOfSamples(); i++) {
 
-            if(x <= xScale)
-            {
+            if (x <= xScale) {
                 ySum += soundData.GetValueAtIndex(i);
                 x++;
-            }
-
-            else
-            {
+            } else {
                 ySum = ySum / x; //average .
 
                 //float normalized = (float)ySum / (float)maxData ;
                 ySum = ySum / yScale;
 
                 // c.drawPoint(xPos, getHeight() - dc - ySum,paint);
-                c.drawLine(previousX, previousY,xPos, getHeight()-dc-ySum, paint);
+                c.drawLine(previousX, previousY, xPos, getHeight() - dc - ySum, paint);
                 previousX = xPos;
                 previousY = getHeight() - dc - ySum;
 
-                if(previousY > debugYMax) debugYMax = previousY;
+                if (previousY > debugYMax) debugYMax = previousY;
 
                 x = 0;
                 ySum = 0;
@@ -181,12 +166,11 @@ public class CustomDrawableView extends View {
         this.postInvalidate();
     }
 
-    public void update(AudioTrack audioTrack, SoundPCM soundData)
-    {
+    public void update(AudioTrack audioTrack, SoundPCM soundData) {
         this.audioTrack = audioTrack;
         this.soundData = soundData;
 
-        totalTimeMs = (float)soundData.NumberOfSamples()/ (float)soundData.SampleRate() * 1000;
+        totalTimeMs = (float) soundData.NumberOfSamples() / (float) soundData.SampleRate() * 1000;
 
         previousState = AudioTrack.PLAYSTATE_STOPPED;
 

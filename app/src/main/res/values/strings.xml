@@ -89,7 +89,7 @@
 
     <!-- K-State Engg Info -->
     <string name="engg_effect_name">K-State Engineering</string>
-    <string name="engg_tutorial"><b>Vision Statement:</b>\nThe Kansas State University College of Engineering will
+    <string name="engg_tutorial"><b>Vision Statement:</b>The Kansas State University College of Engineering will
 be a highly ranked college providing quality education
 within a research environment that develops engineering
 leaders to benefit society.\n\nPlease visit http://www.engg.ksu.edu\nLike us on
@@ -97,5 +97,26 @@ leaders to benefit society.\n\nPlease visit http://www.engg.ksu.edu\nLike us on
         granted: 531\nTenured, tenure-track faculty: 123\nEndowment: $147M</string>
 
     <string name="title_activity_display_tutorial">DisplayTutorial</string>
+    <string name="tutorial_Title">Choose a topic:</string>
+    <string name="buttontext_tutorial_AppBasics">Application Basics</string>
+    <string name="buttontext_tutorial_KstateEngg">K-State Engineering</string>
+    <string name="buttontext_tutorial_halve_samples">Halve Samples</string>
+    <string name="buttontext_tutorial_double_samples">Double Samples</string>
+    <string name="buttontext_tutorial_low_pass">Low Pass</string>
+    <string name="buttontext_tutorial_high_pass">High Pass</string>
+    <string name="buttontext_tutorial_reverse">Reverse</string>
+    <string name="buttontext_tutorial_reverb">Reverb</string>
+    <string name="buttontext_tutorial_back_to_main_app">Back to Application</string>
+    <string name="text_title_app_title">AudioEffectsExpress</string>
+    <string name="button_main_tutorial_help">Tutorial / Help</string>
+    <string name="text_main_funded_by">Funded by: Kansas State University - College of Engineering</string>
+    <string name="buttontext_main_rec">Rec</string>
+    <string name="buttontext_main_halve_samples">Halve Samples</string>
+    <string name="buttontext_main_double_samples">Double Samples</string>
+    <string name="buttontext_main_low_pass">Low Pass</string>
+    <string name="buttontext_main_high_pass">High Pass</string>
+    <string name="buttontext_main_reverse">Reverse</string>
+    <string name="buttontext_main_reverb">Reverb</string>
+    <string name="buttontext_main_play">Play</string>
 
 </resources>

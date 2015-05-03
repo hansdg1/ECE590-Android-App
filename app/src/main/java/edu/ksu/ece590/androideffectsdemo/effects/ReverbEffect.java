@@ -1,8 +1,5 @@
 package edu.ksu.ece590.androideffectsdemo.effects;
 
-import android.content.Context;
-
-import edu.ksu.ece590.androideffectsdemo.R;
 import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 
 /**

@@ -28,10 +28,8 @@
                 android:id="@+id/TitleContent"
                 android:layout_width="650dp"
                 android:layout_height="wrap_content"
-                android:layout_column="0"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="25dp"
-                android:layout_span="2"
                 android:text="@string/start_title"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="50sp"
@@ -42,10 +40,9 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_column="3"
-                android:text="AudioEffectsExpress"
+                android:text="@string/text_title_app_title"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="32dp"
+                android:textSize="32sp"
                 android:textStyle="bold|italic" />
 
             <Button
@@ -55,8 +52,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="-150dp"
                 android:onClick="openTutorial"
-                android:text="Tutorial / Help"
-                android:textSize="20dp" />
+                android:text="@string/button_main_tutorial_help"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </TableRow>
@@ -79,7 +76,7 @@
                 android:layout_marginLeft="700dp"
                 android:layout_marginTop="5dp"
 
-                android:text="Funded by: Kansas State University - College of Engineering"
+                android:text="@string/text_main_funded_by"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
@@ -97,7 +94,7 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/MainContent"
+                android:id="@+id/text_main_content"
                 android:layout_width="611dp"
                 android:layout_height="500dp"
                 android:layout_gravity="center_vertical"
@@ -105,12 +102,9 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="0dp"
                 android:text="@string/start_text"
-
                 android:textAppearance="?android:attr/textAppearanceLarge"
-
                 android:textIsSelectable="false"
-                android:textSize="32dp" />
-
+                android:textSize="32sp" />
 
             <view
                 android:id="@+id/view"
@@ -139,7 +133,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/RecordButton"
+                android:id="@+id/button_record"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center_vertical"
@@ -150,13 +144,13 @@
                 android:checked="false"
                 android:clickable="true"
                 android:enabled="true"
-                android:text="Rec"
+                android:text="@string/buttontext_main_rec"
                 android:textSize="@dimen/buttonPlayRecSize"
                 android:textStyle="normal"
                 android:textAlignment="center" />
 
             <ToggleButton
-                android:id="@+id/HalveSampleButton"
+                android:id="@+id/button_halve_samples"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center"
@@ -167,7 +161,7 @@
                 android:checked="false"
                 android:clickable="true"
                 android:enabled="true"
-                android:text="Halve Samples"
+                android:text="@string/buttontext_main_halve_samples"
                 android:textOff="Halve Samples"
                 android:textOn="Halve Samples"
                 android:textStyle="normal"
@@ -177,7 +171,7 @@
                 android:textSize="@dimen/buttonTextSize" />
 
             <ToggleButton
-                android:id="@+id/DoubleSampleButton"
+                android:id="@+id/button_double_samples"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center"
@@ -188,59 +182,57 @@
                 android:checked="false"
                 android:clickable="true"
                 android:enabled="true"
-                android:text="Double Samples"
-                android:textOff="Double Samples"
-                android:textOn="Double Samples"
+                android:textOff="@string/buttontext_main_double_samples"
+                android:textOn="@string/buttontext_main_double_samples"
                 android:textStyle="normal"
                 android:typeface="sans"
                 android:textAlignment="center"
                 android:textSize="@dimen/buttonTextSize" />
 
             <ToggleButton
-                android:id="@+id/lowpassFilterButton"
+                android:id="@+id/button_lowpass_filter"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="40dp"
                 android:background="@drawable/selector"
-                android:textOff="Low Pass"
-                android:textOn="Low Pass"
                 android:textSize="@dimen/buttonTextSize"
+                android:textOff="@string/buttontext_main_low_pass"
+                android:textOn="@string/buttontext_main_low_pass"
                 android:typeface="sans"
                 android:checked="false" />
 
 
             <ToggleButton
-                android:id="@+id/highpassButton"
+                android:id="@+id/button_highpass_filter"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="40dp"
                 android:background="@drawable/selector"
-                android:text="High Pass"
-                android:textOff="High Pass"
-                android:textOn="High Pass"
+                android:textOff="@string/buttontext_main_high_pass"
+                android:textOn="@string/buttontext_main_high_pass"
                 android:textSize="@dimen/buttonTextSize"
                 android:typeface="sans"
                 android:textAlignment="center" />
 
 
             <ToggleButton
-                android:id="@+id/reverseButton"
+                android:id="@+id/button_reverse"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="40dp"
                 android:background="@drawable/selector"
-                android:textOff="Reverse"
-                android:textOn="Reverse"
+                android:textOff="@string/buttontext_main_reverse"
+                android:textOn="@string/buttontext_main_reverse"
                 android:textSize="@dimen/buttonTextSize"
                 android:typeface="sans"
                 android:textAlignment="center" />
 
 
             <ToggleButton
-                android:id="@+id/ReverbButton"
+                android:id="@+id/button_reverb"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center_vertical"
@@ -248,14 +240,14 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="0dp"
                 android:background="@drawable/selector"
-                android:textOff="Reverb"
-                android:textOn="Reverb"
+                android:textOff="@string/buttontext_main_reverb"
+                android:textOn="@string/buttontext_main_reverb"
                 android:textSize="@dimen/buttonTextSize"
                 android:typeface="sans" />
 
 
             <Button
-                android:id="@+id/PlayButton"
+                android:id="@+id/button_play"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center_vertical"
@@ -265,7 +257,7 @@
                 android:background="@drawable/selector"
                 android:clickable="true"
                 android:enabled="true"
-                android:text="Play"
+                android:text="@string/buttontext_main_play"
                 android:textSize="@dimen/buttonPlayRecSize"
                 android:textStyle="normal"
                 android:textAlignment="center" />
