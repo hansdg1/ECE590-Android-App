@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -41,7 +42,6 @@ import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
 //import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
-
 
     boolean recording = false;
     int sampleFreq = 44100;
@@ -73,102 +73,95 @@ public class MainActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC); //force media volume control instead of ringtone
 
         // find View-elements
         TitleContent = (TextView) findViewById(R.id.TitleContent);
         MainContent = (TextView) findViewById(R.id.text_main_content);
-        ReverbButton = (ToggleButton) findViewById(R.id.button_reverb);
-        DoubleSampleButton = (ToggleButton) findViewById(R.id.button_double_samples);
-        HalveSampleButton = (ToggleButton) findViewById(R.id.button_halve_samples);
 
+        RecordButton = (Button) findViewById(R.id.button_record);
+        HalveSampleButton = (ToggleButton) findViewById(R.id.button_halve_samples);
+        DoubleSampleButton = (ToggleButton) findViewById(R.id.button_double_samples);
         LowPassButton = (ToggleButton) findViewById(R.id.button_lowpass_filter);
         HighPassButton = (ToggleButton) findViewById(R.id.button_highpass_filter);
         ReverseButton = (ToggleButton) findViewById(R.id.button_reverse);
-
+        ReverbButton = (ToggleButton) findViewById(R.id.button_reverb);
         PlayButton = (Button) findViewById(R.id.button_play);
-        RecordButton = (Button) findViewById(R.id.button_record);
 
 
         customDrawableView = (CustomDrawableView) findViewById(R.id.view);
 
         // create click listener
-        final View.OnClickListener ReverbClick = new View.OnClickListener() {
+        final OnClickListener ReverbClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (text_main_content)
-
-                MainContent.setText(R.string.reverb_effect_desc);
                 TitleContent.setText(R.string.reverb_effect_name);
+                MainContent.setText(R.string.reverb_effect_desc);
             }
         };
 
-        View.OnClickListener DoubleSampleClick = new View.OnClickListener() {
+        OnClickListener DoubleSampleClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (text_main_content)
-                MainContent.setText(R.string.double_sample_text);
                 TitleContent.setText(R.string.double_sample_title);
+                MainContent.setText(R.string.double_sample_text);
             }
         };
 
-        View.OnClickListener HalveSampleClick = new View.OnClickListener() {
+        OnClickListener HalveSampleClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (text_main_content)
-                MainContent.setText(R.string.halve_sample_text);
                 TitleContent.setText(R.string.halve_sample_title);
-
+                MainContent.setText(R.string.halve_sample_text);
             }
         };
 
 
         // create click listener
-        View.OnClickListener LowPassClick = new View.OnClickListener() {
+        OnClickListener LowPassClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (text_main_content)
-                MainContent.setText(R.string.lowpass_effect_desc);
                 TitleContent.setText(R.string.lowpass_effect_name);
+                MainContent.setText(R.string.lowpass_effect_desc);
             }
         };
 
-        View.OnClickListener HighPassClick = new View.OnClickListener() {
+        OnClickListener HighPassClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (text_main_content)
-                MainContent.setText(R.string.highpass_effect_desc);
                 TitleContent.setText(R.string.highpass_effect_name);
+                MainContent.setText(R.string.highpass_effect_desc);
             }
         };
 
-        View.OnClickListener ReverseClick = new View.OnClickListener() {
+        OnClickListener ReverseClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (text_main_content)
-                MainContent.setText(R.string.reverse_effect_desc);
                 TitleContent.setText(R.string.reverse_effect_name);
+                MainContent.setText(R.string.reverse_effect_desc);
             }
         };
 
-        View.OnClickListener PlayClick = new View.OnClickListener() {
+        OnClickListener PlayClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 RecordButton.setEnabled(false);
                 RecordButton.setClickable(false);
 
-
                 playRecord();
-
 
                 RecordButton.setEnabled(true);
                 RecordButton.setClickable(true);
             }
         };
 
-        View.OnClickListener RecordClick = new View.OnClickListener() {
+        OnClickListener RecordClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 //if the button was pressed and we were recording, we want to stop
@@ -218,20 +211,15 @@ public class MainActivity extends ActionBarActivity {
             }
         };
 
-
         // assign click listener to the OK button (btnOK)
-        ReverbButton.setOnClickListener(ReverbClick);
-
+        RecordButton.setOnClickListener(RecordClick);
         HalveSampleButton.setOnClickListener(HalveSampleClick);
         DoubleSampleButton.setOnClickListener(DoubleSampleClick);
-
-        PlayButton.setOnClickListener(PlayClick);
-        RecordButton.setOnClickListener(RecordClick);
-
         LowPassButton.setOnClickListener(LowPassClick);
         HighPassButton.setOnClickListener(HighPassClick);
         ReverseButton.setOnClickListener(ReverseClick);
-
+        ReverbButton.setOnClickListener(ReverbClick);
+        PlayButton.setOnClickListener(PlayClick);
 
     }
 
