@@ -226,10 +226,10 @@ public class MainActivity extends ActionBarActivity {
 
     private void startRecord() {
 
-        File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
+        File file = new File(Environment.getExternalStorageDirectory(), "AndroidEffects.pcm");
 
-        /*
         //Debugging popup thing
+        /*
         final String promptStartRecord =
                 "startRecord()\n"
                         + file.getAbsolutePath() + "\n";
@@ -244,19 +244,22 @@ public class MainActivity extends ActionBarActivity {
             }});*/
 
         try {
+			//perhaps we should query free space to prevent potential for IO exception
             file.createNewFile();
 
             OutputStream outputStream = new FileOutputStream(file);
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
             DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
 
-            int minBufferSize = AudioRecord.getMinBufferSize(sampleFreq,
+            int minBufferSize = AudioRecord.getMinBufferSize(
+                    sampleFreq,
                     AudioFormat.CHANNEL_IN_MONO,
                     AudioFormat.ENCODING_PCM_16BIT);
 
             short[] audioData = new short[minBufferSize];
 
-            AudioRecord audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC,
+            AudioRecord audioRecord = new AudioRecord(
+                    MediaRecorder.AudioSource.MIC,
                     sampleFreq,
                     AudioFormat.CHANNEL_IN_MONO,
                     AudioFormat.ENCODING_PCM_16BIT,
@@ -275,14 +278,11 @@ public class MainActivity extends ActionBarActivity {
                         nonZero = true;
                         dataOutputStream.writeShort(audioData[i]);
                     }
-
-
                 }
             }
 
             audioRecord.stop();
             dataOutputStream.close();
-
 
             //load the data again so we can instantly draw it
 
@@ -298,7 +298,6 @@ public class MainActivity extends ActionBarActivity {
             int i = 0;
             while (dataInputStream.available() > 0) {
                 audioData[i] += dataInputStream.readShort();
-
                 i++;
             }
 
@@ -307,13 +306,11 @@ public class MainActivity extends ActionBarActivity {
             //Just something to test with. This should all be refactored
             SoundPCM sound = new SoundPCM(audioData, sampleFreq);
 
-
             customDrawableView.DrawImageBuffer(sound);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -336,7 +333,6 @@ public class MainActivity extends ActionBarActivity {
                 int i = 0;
                 while (dataInputStream.available() > 0) {
                     audioData[i] += dataInputStream.readShort();
-
                     i++;
                 }
 
@@ -358,18 +354,14 @@ public class MainActivity extends ActionBarActivity {
                 if (DoubleSampleButton.isChecked()) {
                     eController.AddEffect(new DoubleSampleEffect());
                     //Double the sample effect
-
                 }
-
-
                 if (LowPassButton.isChecked()) {
-                    eController.AddEffect((new LowPassEffect(100.0f, sound.NumberOfSamples() / sound.SampleRate())));
+                    eController.AddEffect(new LowPassEffect(100.0f, sound.NumberOfSamples() / sound.SampleRate()));
                 }
                 if (HighPassButton.isChecked()) {
-                    eController.AddEffect((new HighPassEffect(.5f, sound.NumberOfSamples() / sound.SampleRate())));
+                    eController.AddEffect(new HighPassEffect(0.5f, sound.NumberOfSamples() / sound.SampleRate()));
                 }
                 if (ReverseButton.isChecked()) {
-
                     eController.AddEffect(new ReverseEffect());
                 }
                 if (ReverbButton.isChecked()) {
@@ -394,7 +386,6 @@ public class MainActivity extends ActionBarActivity {
 
                 audioTrack.play();
 
-
                 audioTrack.write(sound.GetBuffer(), 0, sound.GetBuffer().length);
 
                 audioTrack.stop();
@@ -406,24 +397,17 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
-
     }
 
     private void playRecord() {
-
-
         audioTask = new AudioPlayTask();
         audioTask.execute();
-
-
     }
 
     public void openTutorial(View view) {
         Intent intent = new Intent(this, DisplayTutorial.class);
         startActivity(intent);
     }
-
 }

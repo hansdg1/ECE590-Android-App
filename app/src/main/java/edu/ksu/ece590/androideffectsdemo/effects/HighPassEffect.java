@@ -7,10 +7,12 @@ import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
  */
 public class HighPassEffect implements IEffect {
 
+	//f is to tell JAVA that it's a float
+	
     float rc = .00001f;
     float dt = .001f; //time interval
 
-
+	//rc
     public HighPassEffect(float rc, int dt) {
         this.rc = rc;
         this.dt = dt;
@@ -26,8 +28,13 @@ public class HighPassEffect implements IEffect {
 
         buffer[0] = input.GetValueAtIndex(0);
         for (int i = 1; i < input.NumberOfSamples(); i++) {
-            buffer[i] = (short) (float) (
-                    alpha * (buffer[i - 1] + input.GetValueAtIndex(i) - input.GetValueAtIndex(i - 1)));
+            buffer[i] = (short) (float) ( 
+				alpha 
+				* ( buffer[i - 1] 
+				+ input.GetValueAtIndex(i) 
+				- input.GetValueAtIndex(i - 1)
+				) 
+			);
         }
 
         return new SoundPCM(buffer, input.SampleRate());
