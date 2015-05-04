@@ -9,7 +9,6 @@ import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +22,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +36,8 @@ import edu.ksu.ece590.androideffectsdemo.effects.ReverbEffect;
 import edu.ksu.ece590.androideffectsdemo.effects.ReverseEffect;
 import edu.ksu.ece590.androideffectsdemo.renders.CustomDrawableView;
 import edu.ksu.ece590.androideffectsdemo.sounds.SoundPCM;
+
+/**/
 
 //import android.widget.Toast;
 
@@ -56,15 +56,16 @@ public class MainActivity extends ActionBarActivity {
     ToggleButton HighPassButton;
     ToggleButton ReverseButton;
 
-
     Button PlayButton;
     Button RecordButton;
-
 
     CustomDrawableView customDrawableView;
 
     AudioPlayTask audioTask;
 
+    //The file for the startRecord(), and AudioPlayTask() methods
+    //
+    //File file = new File(Environment.getExternalFilesDir(), "AndroidEffects.pcm");
 
     /**
      * Called when the activity is first created.
@@ -88,11 +89,10 @@ public class MainActivity extends ActionBarActivity {
         ReverbButton = (ToggleButton) findViewById(R.id.button_reverb);
         PlayButton = (Button) findViewById(R.id.button_play);
 
-
         customDrawableView = (CustomDrawableView) findViewById(R.id.view);
 
         // create click listener
-        final OnClickListener ReverbClick = new OnClickListener() {
+        OnClickListener ReverbClick = new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // change text of the TextView (text_main_content)
@@ -226,7 +226,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void startRecord() {
 
-        File file = new File(Environment.getExternalStorageDirectory(), "AndroidEffects.pcm");
+        File file = new File(getExternalFilesDir(null), "AndroidEffects.pcm");
 
         //Debugging popup thing
         /*
@@ -244,7 +244,7 @@ public class MainActivity extends ActionBarActivity {
             }});*/
 
         try {
-			//perhaps we should query free space to prevent potential for IO exception
+            //perhaps we should query free space to prevent potential for IO exception
             file.createNewFile();
 
             OutputStream outputStream = new FileOutputStream(file);
@@ -319,7 +319,7 @@ public class MainActivity extends ActionBarActivity {
         protected Void doInBackground(Void... params) {
             try {
 
-                File file = new File(Environment.getExternalStorageDirectory(), "test.pcm");
+                File file = new File(getExternalFilesDir(null), "AndroidEffects.pcm");
 
                 int shortSizeInBytes = Short.SIZE / Byte.SIZE;
                 int bufferSizeInBytes = (int) (file.length() / shortSizeInBytes);
@@ -392,8 +392,6 @@ public class MainActivity extends ActionBarActivity {
                 audioTrack.release();
 
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
