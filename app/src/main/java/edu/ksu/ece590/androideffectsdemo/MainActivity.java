@@ -170,15 +170,14 @@ public class MainActivity extends ActionBarActivity {
                     RecordButton.setBackgroundColor(Color.LTGRAY);
                     PlayButton.setEnabled(true);
                     PlayButton.setClickable(true);
-
                     recording = false;
+
                 } else {
                     //we were not recording, and we want to start
                     RecordButton.setText("Stop");
                     RecordButton.setBackgroundColor(Color.RED);
                     PlayButton.setEnabled(false);
                     PlayButton.setClickable(false);
-
 
                     //reset the toggle buttons
                     HalveSampleButton.setChecked(false);
@@ -201,12 +200,8 @@ public class MainActivity extends ActionBarActivity {
                             recording = true;
                             startRecord();
                         }
-
-
                     });
-
                     recordThread.start();
-
                 }
             }
         };

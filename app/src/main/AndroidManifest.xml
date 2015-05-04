@@ -3,7 +3,9 @@
     package="edu.ksu.ece590.androideffectsdemo" >
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- No longer needed since we're writing to Private App storage dir-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
 
     <application
         android:allowBackup="true"
